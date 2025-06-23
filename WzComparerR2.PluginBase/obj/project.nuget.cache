@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "dWl557iYBaI=",
+  "success": true,
+  "projectFilePath": "E:\\ArtaleAvatarMaker\\WzComparerR2.PluginBase\\WzComparerR2.PluginBase.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\elen8\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0\\microsoft.win32.systemevents.8.0.0.nupkg.sha512",
+    "C:\\Users\\elen8\\.nuget\\packages\\system.drawing.common\\8.0.11\\system.drawing.common.8.0.11.nupkg.sha512"
+  ],
+  "logs": []
+}
