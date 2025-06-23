@@ -50,7 +50,6 @@ namespace MapleNecrocer
             MobButton = new Button();
             ViewButton = new Button();
             label4 = new Label();
-            label1 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -382,20 +381,10 @@ namespace MapleNecrocer
             label4.TabIndex = 12;
             label4.Text = "楓之谷資料夾";
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Microsoft JhengHei UI", 24F, FontStyle.Regular, GraphicsUnit.Pixel);
-            label1.Location = new Point(12, 45);
-            label1.Name = "label1";
-            label1.Size = new Size(0, 32);
-            label1.TabIndex = 13;
-            // 
             // MainForm
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(1175, 913);
-            Controls.Add(label1);
             Controls.Add(label4);
             Controls.Add(panel1);
             Controls.Add(OpenFolderButton);
@@ -404,7 +393,7 @@ namespace MapleNecrocer
             Icon = (Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
             MaximizeBox = false;
-            MaximumSize = new Size(5000, 5000);
+            MaximumSize = new Size(1193, 960);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ArtaleAvatarMaker";
@@ -438,6 +427,5 @@ namespace MapleNecrocer
         public Button EffectRingButton;
         public Button ChatRingButton;
         public Button EffectButton;
-        public Label label1;
     }
 }

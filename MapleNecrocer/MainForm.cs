@@ -750,7 +750,7 @@ public partial class MainForm : Form
 
     private void OpenFolderButton_Click(object sender, EventArgs e)
     {
-        label1.Text="載入中...";
+       
         if (SelectFolderForm.Instance == null)
             new SelectFolderForm().Show();
         else
