@@ -1,0 +1,20 @@
+<License>
+<Data>
+<LicensedTo>The World Bank</LicensedTo>
+<EmailTo>kkumar3@worldbankgroup.org</EmailTo>
+<LicenseType>Developer Small Business</LicenseType>
+<LicenseNote>1 Developer And 1 Deployment Location</LicenseNote>
+<OrderID>210316185957</OrderID>
+<UserID>744916</UserID>
+<OEM>This is not a redistributable license</OEM>
+<Products>
+<Product>Aspose.Total for .NET</Product>
+</Products>
+<EditionType>Professional</EditionType>
+<SerialNumber>03fb199a-5c8a-48db-992e-d084ff066d0c</SerialNumber>
+<SubscriptionExpiry>20220516</SubscriptionExpiry>
+<LicenseVersion>3.0</LicenseVersion>
+<LicenseInstructions>https://purchase.aspose.com/policies/use-license</LicenseInstructions>
+</Data>
+<Signature>WnBX6rNtzBrSLWzAtYj8Kdt1KIB92Qk/lDlSf2S5LTHXgdq/PCcjXuNFjt4BnFfp4VKsulJ8VxQ1jB0nc4GYVqfKzMxHQdiqneM752Z29OngrUn4bM+sYzYeRLOT8JqlOQ7NkDU4mI6gUrCwqr7gQV1l2IZBq5s3LAG0TcCVgpA=</Signature>
+</License>
