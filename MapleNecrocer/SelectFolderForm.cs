@@ -111,12 +111,12 @@ public partial class SelectFolderForm : Form
             var FindBaseWz = Directory.EnumerateFiles(Dialog.SelectedPath, "Base.wz;Data.wz");
             if (FindBaseWz.Count() >= 1)
             {
+               
                 this.Hide();
                 MainForm.Instance.RemoveWz();
-
-                //  var Graphic = MainForm.Instance.MapListBox.CreateGraphics();
-                // var Font = new System.Drawing.Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
-                // Graphic.DrawString("Loading...", Font, Brushes.Black, 10, 50);
+                var Graphic = MainForm.Instance.CreateGraphics();
+                var Font = new System.Drawing.Font(FontFamily.GenericSansSerif, 14, FontStyle.Bold);
+                Graphic.DrawString("載入中...", Font, Brushes.Black, 10, 50);
 
                 MainForm.OpenWZ(FindBaseWz.First());
 
@@ -129,7 +129,7 @@ public partial class SelectFolderForm : Form
                 //
                 EnableButtons();
 
-                MainForm.Instance.label1.Text = "";
+                Graphic.Clear(Color.FromArgb(255, 240, 240, 240));
 
                 foreach (var Iter in ListOfLines)
                 {
@@ -155,11 +155,10 @@ public partial class SelectFolderForm : Form
     private void RecentFilesGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
     {
         this.Hide();
-
-
-        var Font = new System.Drawing.Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
-        //   Graphic.DrawString("Loading...", Font, Brushes.Black, 10, 50);
-
+        var Graphic = MainForm.Instance.CreateGraphics();
+        var Font = new System.Drawing.Font(FontFamily.GenericSansSerif, 14, FontStyle.Bold);
+        Graphic.DrawString("載入中...", Font, Brushes.Black, 10, 50);
+      
         var Path = RecentFilesGrid.Rows[e.RowIndex].Cells[0].Value.ToString();
         var FindBaseWz = Directory.EnumerateFiles(Path, "Base.wz;Data.wz");
         MainForm.Instance.RemoveWz();
@@ -174,7 +173,7 @@ public partial class SelectFolderForm : Form
         AvatarForm.Instance.FormBorderStyle = FormBorderStyle.None;
         AvatarForm.Instance.Location = new Point(10, 89);
         EnableButtons();
-
-        MainForm.Instance.label1.Text = "";
+        Graphic.Clear(Color.FromArgb(255,240,240,240));
+      
     }
 }
