@@ -1,0 +1,10 @@
+D:\MapleNecrocer-master\WzComparerR2.WzLib\bin\Debug\net8.0\WzComparerR2.WzLib.deps.json
+D:\MapleNecrocer-master\WzComparerR2.WzLib\bin\Debug\net8.0\WzComparerR2.WzLib.dll
+D:\MapleNecrocer-master\WzComparerR2.WzLib\bin\Debug\net8.0\WzComparerR2.WzLib.pdb
+D:\MapleNecrocer-master\WzComparerR2.WzLib\obj\Debug\net8.0\WzComparerR2.WzLib.csproj.AssemblyReference.cache
+D:\MapleNecrocer-master\WzComparerR2.WzLib\obj\Debug\net8.0\WzComparerR2.WzLib.GeneratedMSBuildEditorConfig.editorconfig
+D:\MapleNecrocer-master\WzComparerR2.WzLib\obj\Debug\net8.0\WzComparerR2.WzLib.csproj.CoreCompileInputs.cache
+D:\MapleNecrocer-master\WzComparerR2.WzLib\obj\Debug\net8.0\WzComparerR2.WzLib.dll
+D:\MapleNecrocer-master\WzComparerR2.WzLib\obj\Debug\net8.0\refint\WzComparerR2.WzLib.dll
+D:\MapleNecrocer-master\WzComparerR2.WzLib\obj\Debug\net8.0\WzComparerR2.WzLib.pdb
+D:\MapleNecrocer-master\WzComparerR2.WzLib\obj\Debug\net8.0\ref\WzComparerR2.WzLib.dll
