@@ -1376,9 +1376,10 @@ public class AvatarParts : SpriteEx
         else
             MapleChair.CanUse = true;
 
-        if (MapleChair.IsUse)
+        if (MapleChair.IsUse) 
         {
             State = MapleChair.CharacterAction;
+             //State = "sit.0";
         }
         UpdateFrame();
 
