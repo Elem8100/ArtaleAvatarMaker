@@ -57,6 +57,7 @@ public partial class SelectFolderForm : Form
         MainForm.Instance.EffectRingButton.Enabled = true;
         MainForm.Instance.ChatRingButton.Enabled = true;
         MainForm.Instance.EffectButton.Enabled = true;
+        MainForm.Instance.ChairButton.Enabled = true;
     }
 
     public SelectFolderForm()

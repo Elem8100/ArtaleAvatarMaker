@@ -1220,7 +1220,8 @@ public partial class AvatarForm : Form
 
             EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(FrameListDraw.AvatarPanelTexture);
             EngineFunc.Canvas.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
-            EngineFunc.SpriteEngine.DrawEx("Player", "ItemEffect", "SetEffect", "LabelRingTag", "MedalTag", "NickNameTag", "ChatRingBalloon");
+            EngineFunc.SpriteEngine.DrawEx("Player", "ItemEffect", "SetEffect", "LabelRingTag", "MedalTag", "NickNameTag",
+                "ChatRingBalloon","MapleChair","TamingMob");
 
             EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(texture);
             EngineFunc.Canvas.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
@@ -1345,7 +1346,8 @@ public partial class AvatarForm : Form
 
             EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(FrameListDraw.AvatarPanelTexture);
             EngineFunc.Canvas.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
-            EngineFunc.SpriteEngine.DrawEx("Player", "ItemEffect", "SetEffect", "LabelRingTag", "MedalTag", "NickNameTag", "ChatRingBalloon");
+            EngineFunc.SpriteEngine.DrawEx("Player", "ItemEffect", "SetEffect", "LabelRingTag", "MedalTag", "NickNameTag",
+                "ChatRingBalloon", "MapleChair","TamingMob");
 
             EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(texture);
             EngineFunc.Canvas.DrawCropArea(

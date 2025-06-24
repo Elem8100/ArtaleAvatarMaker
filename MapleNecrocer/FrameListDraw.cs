@@ -56,7 +56,8 @@ public class FrameListDraw : MonoGameControl
     {
         EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(AvatarPanelTexture);
         EngineFunc.Canvas.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
-        EngineFunc.SpriteEngine.DrawEx("Player", "ItemEffect", "SetEffect", "LabelRingTag","MedalTag", "NickNameTag", "ChatRingBalloon");
+        EngineFunc.SpriteEngine.DrawEx("Player", "ItemEffect", "SetEffect", "LabelRingTag","MedalTag", "NickNameTag",
+           "MapleChair", "ChatRingBalloon","TamingMob");
         EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(null);
        
     }
