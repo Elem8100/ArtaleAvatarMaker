@@ -39,8 +39,11 @@ public partial class ChairForm : Form
         if (ItemEffect.AllList.Contains(ID))
             ItemEffect.Create(ID, EffectType.Chair);
         MapleChair.IsUse = true;
-
-
+       
+       
+        AvatarForm.SelectedFrame = true;
+        AvatarForm.SelectedAction="sit";
+        AvatarForm.SelectedFrameNum=0;
     }
 
     private void ChairForm_Shown(object sender, EventArgs e)
