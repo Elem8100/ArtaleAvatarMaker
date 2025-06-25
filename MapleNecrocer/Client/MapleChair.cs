@@ -321,7 +321,7 @@ public class MapleChair : SpriteEx
 
     public override void DoDraw()
     {
-      MainForm.Instance.Text= CharacterAction;
+    
         if(Game.Player.Action==CharacterAction)
             base.DoDraw();
 
