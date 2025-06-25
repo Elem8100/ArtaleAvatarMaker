@@ -420,6 +420,11 @@ public partial class AvatarForm : Form
             ImageGrids[i].ThumbnailSize = new System.Drawing.Size(32, 32);
             ImageGrids[i].ItemClick += (o, e) =>
             {
+                MapleChair.IsUse = false;
+                AvatarForm.SelectedFrame = true;
+                AvatarForm.SelectedAction = Game.Player.StandType;
+                AvatarForm.SelectedFrameNum = 0;
+
                 AddEqps(e.Item.FileName);
                 AddInventory();
                 Game.Player.RemoveSprites();
@@ -428,6 +433,10 @@ public partial class AvatarForm : Form
                     Game.Player.Spawn(Player.EqpList[i]);
                 }
                 ResetDye2();
+
+               
+               
+
             };
             ImageGrids[i].ItemHover += (o, e) =>
             {
@@ -584,7 +593,7 @@ public partial class AvatarForm : Form
     List<string> PartList = new();
     private void button1_Click(object sender, EventArgs e)
     {
-
+        MapleChair.IsUse=false;
         tabControl1.SelectedIndex = 0;
         string CharacterDir = "";
         string ButtonName = ((System.Windows.Forms.Button)sender).Name.Trim(' ');
@@ -833,7 +842,7 @@ public partial class AvatarForm : Form
     }
     private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        MapleChair.IsUse=false;
 
         void LoadAvatarPics()
         {
@@ -1051,6 +1060,11 @@ public partial class AvatarForm : Form
     {
         if (label1.Text == "")
             return;
+        MapleChair.IsUse = false;
+        AvatarForm.SelectedFrame = true;
+        AvatarForm.SelectedAction = Game.Player.StandType;
+        AvatarForm.SelectedFrameNum = 0;
+
         AddEqps(label1.Text);
         AddInventory();
         Game.Player.RemoveSprites();
