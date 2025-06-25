@@ -412,7 +412,7 @@ public class Player : JumperSprite
                             {
                                 if ((MapleChair.IsUse) || (TamingMob.IsUse))
                                 {
-                                    if ((Part == PartName.CashWeapon) || (Part == PartName.Weapon))
+                                    if (((Part == PartName.CashWeapon) || (Part == PartName.Weapon)) && Game.Player.Action=="sit")
                                         Sprite.Visible = false;
                                     else
                                         Sprite.Visible = true;
@@ -1360,9 +1360,10 @@ public class AvatarParts : SpriteEx
         
 
        
-        if ((TamingMob.IsUse) || (MapleChair.IsUse))
+          // if ((TamingMob.IsUse) || (MapleChair.IsUse))
+         if(Owner.Action=="sit")
         {
-            if ((Part == PartName.Weapon) || (Part == PartName.CashWeapon))
+            if (((Part == PartName.Weapon) || (Part == PartName.CashWeapon)) && Owner.Action=="sit" )
                 Visible = false;
         }
         else
