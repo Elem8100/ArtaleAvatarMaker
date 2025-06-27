@@ -95,7 +95,8 @@ public class MapleChair : SpriteEx
                 if (Wz.GetNode("Character/TamingMob/" + "0" + TamingMobID + ".img/characterAction/sit") != null)
                 {
                     HasSitAction = true;
-                    CharacterAction = Wz.GetNode("Character/TamingMob/" + "0" + TamingMobID + ".img/characterAction/sit").ToStr();
+                    //  CharacterAction = Wz.GetNode("Character/TamingMob/" + "0" + TamingMobID + ".img/characterAction/sit").ToStr();
+                    CharacterAction = "sit";
                 }
                 else
                 {
@@ -317,6 +318,9 @@ public class MapleChair : SpriteEx
             Offset.Y = -origin.Y;
         }
 
+       
+
+
     }
 
     public override void DoDraw()
@@ -324,6 +328,8 @@ public class MapleChair : SpriteEx
     
         if(Game.Player.Action==CharacterAction)
             base.DoDraw();
+
+       
 
     }
 }

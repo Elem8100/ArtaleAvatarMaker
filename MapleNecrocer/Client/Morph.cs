@@ -7,6 +7,8 @@ using WzComparerR2.WzLib;
 using Keyboard = SpriteEngine.Keyboard;
 using Input = Microsoft.Xna.Framework.Input.Keys;
 using Spine;
+using System.Security;
+using System.Reflection.Metadata;
 
 namespace MapleNecrocer;
 
@@ -14,12 +16,12 @@ public class Morph : SpriteEx
 {
     public Morph(Sprite Parent) : base(Parent)
     {
-
+        Instance = this;
     }
     string UpPath;
     string Path;
-    string State;
-    int Frame;
+    public string State;
+    public int Frame;
     string MorphNum;
     int FTime;
     int Delay;
@@ -27,6 +29,7 @@ public class Morph : SpriteEx
     static Wz_Node Entry;
     Wz_Vector origin = new(0, 0);
     public static bool IsUse;
+    public static Morph Instance;
     public static void Create(string MorphNum)
     {
         Entry = Wz.GetNode("Morph/" + MorphNum);
@@ -76,7 +79,9 @@ public class Morph : SpriteEx
 
     public override void DoMove(float Delta)
     {
-        base.DoMove(Delta);
+      //  base.DoMove(Delta);
+      
+        
         if (Wz.HasDataE(UpPath + "/" + State + "/" + Frame))
         {
             Path = UpPath + "/" + State + "/" + Frame;
@@ -102,12 +107,9 @@ public class Morph : SpriteEx
             Z = Game.Player.Z - Wz.EquipData[Path + "/z"].ToInt();
         else
             Z = Game.Player.Z;
+       
 
-        if (Keyboard.KeyDown(Input.Left))
-            FlipX = false;
-        if (Keyboard.KeyDown(Input.Right))
-            FlipX = true;
-
+        /*
         if (Game.Player.JumpState != JumpState.jsNone)
         {
             Frame = 0;
@@ -157,7 +159,7 @@ public class Morph : SpriteEx
                     break;
             }
         }
-
+        */
         if (ImageNode.GetNode("origin") != null)
             origin = ImageNode.GetNode("origin").ToVector();
 
@@ -170,7 +172,7 @@ public class Morph : SpriteEx
                 Flip = -1;
                 break;
             case false:
-                X = Game.Player.X;
+                X = Game.Player.X-2;
                 Offset.X = -origin.X;
                 Flip = 1;
                 break;

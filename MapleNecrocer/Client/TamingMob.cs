@@ -375,4 +375,10 @@ public class TamingMob : SpriteEx
 
     }
 
+    public override void DoDraw()
+    {
+        if(Game.Player.Action=="sit")
+          base.DoDraw();
+    }
+
 }

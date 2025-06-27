@@ -849,6 +849,13 @@ public class AvatarParts : SpriteEx
         if ((Image == "head") && (Time == 0))
             ChangeFrame = true;
 
+
+        MapleChair.BodyRelMove.X = 0;
+        MapleChair.BodyRelMove.Y = 0;
+        TamingMob.Navel.X = 0;
+        TamingMob.Navel.Y = 0;
+
+
         if (Wz.HasDataE("Character/00002000.img/" + State + "/" + Frame + "/move"))
         {
             MoveOffset = WzDict.GetVectorE("Character/00002000.img/" + State + "/" + Frame + "/move");
@@ -866,7 +873,9 @@ public class AvatarParts : SpriteEx
                 MoveOffset.Y = 0;
             }
         }
-
+        
+       
+        
         if (FlipX)
             Owner.MoveX = Owner.X - 1 - MoveOffset.X;
         else
@@ -912,6 +921,7 @@ public class AvatarParts : SpriteEx
             AnimEnd = false;
             State = AvatarForm.SelectedAction;
             Frame = AvatarForm.SelectedFrameNum;
+           
         }
      
 
