@@ -76,7 +76,7 @@
             button1.Name = "button1";
             button1.Size = new Size(96, 26);
             button1.TabIndex = 4;
-            button1.Text = "Remove";
+            button1.Text = "刪除";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 

@@ -7,8 +7,9 @@ using Rectangle = Microsoft.Xna.Framework.Rectangle;
 using Aspose.PSD.FileFormats.Psd;
 using Aspose.PSD.FileFormats.Psd;
 using Aspose.PSD.FileFormats.Psd.Layers;
-using BlendMode=MonoGame.SpriteEngine.BlendMode;
+using BlendMode = MonoGame.SpriteEngine.BlendMode;
 using DevComponents.DotNetBar;
+using static System.Windows.Forms.AxHost;
 namespace MapleNecrocer;
 public partial class AvatarForm : Form
 {
@@ -415,7 +416,7 @@ public partial class AvatarForm : Form
             ImageGrids[i].BackColor = SystemColors.Window;
             ImageGrids[i].Colors.BackColor = SystemColors.ButtonFace;
             ImageGrids[i].Colors.SelectedBorderColor = Color.Red;
-            
+
             ImageGrids[i].BorderStyle = BorderStyle.Fixed3D;
             ImageGrids[i].ThumbnailSize = new System.Drawing.Size(32, 32);
             ImageGrids[i].ItemClick += (o, e) =>
@@ -434,8 +435,8 @@ public partial class AvatarForm : Form
                 }
                 ResetDye2();
 
-               
-               
+
+
 
             };
             ImageGrids[i].ItemHover += (o, e) =>
@@ -593,7 +594,7 @@ public partial class AvatarForm : Form
     List<string> PartList = new();
     private void button1_Click(object sender, EventArgs e)
     {
-        MapleChair.IsUse=false;
+        MapleChair.IsUse = false;
         tabControl1.SelectedIndex = 0;
         string CharacterDir = "";
         string ButtonName = ((System.Windows.Forms.Button)sender).Name.Trim(' ');
@@ -842,7 +843,7 @@ public partial class AvatarForm : Form
     }
     private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        MapleChair.IsUse=false;
+        MapleChair.IsUse = false;
 
         void LoadAvatarPics()
         {
@@ -884,7 +885,7 @@ public partial class AvatarForm : Form
 
             case 3:
                 ResetDyeGrid2();
-               SelectedFrame = false;
+                SelectedFrame = false;
                 break;
             case 4:
                 if (!SearchGridLoaded)
@@ -1162,10 +1163,10 @@ public partial class AvatarForm : Form
         Directory.CreateDirectory(Path.GetDirectoryName(filepath));
         Stream stream = File.OpenWrite(filepath);
         fixedTexture.SaveAsPng(stream, fixedTexture.Width, fixedTexture.Height);
-      
+
         stream.Dispose();
         fixedTexture.Dispose();
-       
+
     }
 
     private void ExportSprite(object sender, EventArgs e)
@@ -1227,6 +1228,51 @@ public partial class AvatarForm : Form
             SelectedFrameNum = sprite[1].ToInt();
             SelectedAction = sprite[0];
 
+
+            if (Morph.IsUse && Morph.Instance != null)
+            {
+                switch (SelectedAction)
+                {
+                    case "stand1":
+                    case "stand2":
+                        Morph.Instance.State = "stand";
+                        break;
+
+                    case "walk1":
+                    case "walk2":
+                        Morph.Instance.State = "walk";
+                        break;
+
+                    case "ladder":
+                        Morph.Instance.State = "ladder";
+                        break;
+                    case "rope":
+                        Morph.Instance.State = "rope";
+                        break;
+                    case "fly":
+                        Morph.Instance.State = "fly";
+                        break;
+
+                    case "jump":
+                        Morph.Instance.State = "jump";
+                        break;
+
+                    case "prone":
+                        Morph.Instance.State = "prone";
+                        break;
+                    default:
+                        Morph.Instance.State = "stand";
+                        break;
+                }
+                Morph.Instance.Frame = SelectedFrameNum;
+                Morph.Instance.DoMove(1);
+
+            }
+
+
+
+
+
             // 必须domove 3次，不然序号会慢一帧
             Game.Player.DoMove(0);
             Game.Player.DoMove(0);
@@ -1235,7 +1281,7 @@ public partial class AvatarForm : Form
             EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(FrameListDraw.AvatarPanelTexture);
             EngineFunc.Canvas.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
             EngineFunc.SpriteEngine.DrawEx("Player", "ItemEffect", "SetEffect", "LabelRingTag", "MedalTag", "NickNameTag",
-                "ChatRingBalloon","MapleChair","TamingMob");
+                "ChatRingBalloon", "MapleChair", "TamingMob", "Morph");
 
             EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(texture);
             EngineFunc.Canvas.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
@@ -1361,7 +1407,7 @@ public partial class AvatarForm : Form
             EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(FrameListDraw.AvatarPanelTexture);
             EngineFunc.Canvas.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
             EngineFunc.SpriteEngine.DrawEx("Player", "ItemEffect", "SetEffect", "LabelRingTag", "MedalTag", "NickNameTag",
-                "ChatRingBalloon", "MapleChair","TamingMob");
+                "ChatRingBalloon", "MapleChair", "TamingMob", "Morph");
 
             EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(texture);
             EngineFunc.Canvas.DrawCropArea(
@@ -1519,14 +1565,14 @@ public partial class AvatarForm : Form
 
     private void timer1_Tick(object sender, EventArgs e)
     {
-        
+
         if (Game.Player.ResetAction == false)
-        {  
+        {
             UpdateAvatarBound();
             tabControl1.Enabled = true;
             timer1.Enabled = false;
             label9.Visible = false;
-            
+
             if (tabControl1.SelectedIndex == 6)
             {
                 FrameListBox_SelectedIndexChanged(sender, e);
@@ -1541,16 +1587,16 @@ public partial class AvatarForm : Form
     static int SaveCount;
     private void SavePsdButton_Click(object sender, EventArgs e)
     {
-        AdjustX=128;
-        AdjustY=128;
-        AdjustW=256;
-        AdjustH=256;
+        AdjustX = 128;
+        AdjustY = 128;
+        AdjustW = 256;
+        AdjustH = 256;
         customAABB_checkBox.Checked = true;
-        SavePsdButton.Text ="儲存中,請稍後...";
-        SavePsdButton.Enabled = false;  
+        SavePsdButton.Text = "儲存中,請稍後...";
+        SavePsdButton.Enabled = false;
         _ExportAllSprite("Temp");
 
-        Bitmap Bmp = new(System.Environment.CurrentDirectory + "\\Temp\\" +  "walk1.0.png");
+        Bitmap Bmp = new(System.Environment.CurrentDirectory + "\\Temp\\" + "walk1.0.png");
 
         int Width = Bmp.Width;
         int Height = Bmp.Height;
@@ -1577,15 +1623,21 @@ public partial class AvatarForm : Form
             }
         }
 
-        using var MainPSD = (PsdImage)Aspose.PSD.Image.Load(System.Environment.CurrentDirectory+ "\\Avatar_CapeMod.psd");
+        using var Back = (PsdImage)Aspose.PSD.Image.Load(System.Environment.CurrentDirectory + "\\back2.psd");
+
+
+        using var MainPSD = (PsdImage)Aspose.PSD.Image.Load(System.Environment.CurrentDirectory + "\\Avatar_CapeMod.psd");
         var graphic = new Aspose.PSD.Graphics(MainPSD.Layers[0]);
         graphic.Clear(new Aspose.PSD.Color());
+
 
         foreach (var Iter in FileNameList)
         {
             if (OriginData.ContainsKey(Iter))
             {
                 var PsdImage = Aspose.PSD.RasterImage.Load(System.Environment.CurrentDirectory + "\\Temp\\" + Iter);
+                if(Morph.IsUse)
+                  graphic.DrawImage(Back, new Aspose.PSD.Point(OriginData[Iter].x-94, OriginData[Iter].y-135));
                 graphic.DrawImage(PsdImage, new Aspose.PSD.Point(OriginData[Iter].x - 120, OriginData[Iter].y - 140));
                 PsdImage.Dispose();
             }
@@ -1598,17 +1650,17 @@ public partial class AvatarForm : Form
         layersList.RemoveAt(1);
         MainPSD.Layers = layersList.ToArray();
         */
-        SaveCount+=1;
-        MainPSD.Save(System.Environment.CurrentDirectory + "\\PSD\\" + "NewAvatar"+SaveCount.ToString() + ".psd", true);
-        MessageBox.Show("儲存NewAvatar"+SaveCount.ToString()+".psd 完成"+"\n"+"存放在PSD資料夾裡面");
+        SaveCount += 1;
+        MainPSD.Save(System.Environment.CurrentDirectory + "\\PSD\\" + "NewAvatar" + SaveCount.ToString() + ".psd", true);
+        MessageBox.Show("儲存NewAvatar" + SaveCount.ToString() + ".psd 完成" + "\n" + "存放在PSD資料夾裡面");
         //"D:/05001.psd", true);
         customAABB_checkBox.Checked = false;
         SavePsdButton.Text = "儲存psd";
         SavePsdButton.Enabled = true;
         AdjustX = ScrollBarX.Value;
         AdjustY = ScrollBarY.Value; ;
-        AdjustW = ScrollBarW.Value; 
-        AdjustH = ScrollBarH.Value; 
+        AdjustW = ScrollBarW.Value;
+        AdjustH = ScrollBarH.Value;
         MainPSD.Dispose();
     }
 }

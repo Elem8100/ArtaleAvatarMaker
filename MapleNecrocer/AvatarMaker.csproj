@@ -12,6 +12,10 @@
    
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="AvatarFormDraw.cs~RF517cfa47.TMP" />
+  </ItemGroup>
+
   
   <ItemGroup>
     <Content Include="MapleStoryGM_Icon.ico" />

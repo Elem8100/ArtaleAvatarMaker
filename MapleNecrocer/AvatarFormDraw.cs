@@ -56,12 +56,18 @@ public class AvatarFormDraw : MonoGameControl
         EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(AvatarPanelTexture);
         EngineFunc.Canvas.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
         EngineFunc.SpriteEngine.DrawEx("Player", "ItemEffect", "SetEffect", "LabelRingTag", "MedalTag", "NickNameTag",
-            "MapleChair","ChatRingBalloon","TamingMob");
+            "MapleChair","ChatRingBalloon","TamingMob","Morph");
         EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(null);
     }
 
     protected override void Draw()
     {
+       
+        MapleChair.BodyRelMove.X = 0;
+        MapleChair.BodyRelMove.Y = 0;
+        TamingMob.Navel.X = 0;
+        TamingMob.Navel.Y = 0;
+
         EngineFunc.Canvas.Draw(CheckBoardTexture, 0, 0);
         // Editor.graphics.Clear(Color.Aqua);
         int WX = (int)(Game.Player.X - EngineFunc.SpriteEngine.Camera.X - 130 + MapleChair.BodyRelMove.X - TamingMob.Navel.X);
