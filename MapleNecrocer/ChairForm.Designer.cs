@@ -33,6 +33,7 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
+            button1 = new Button();
             tabControl1.SuspendLayout();
             SuspendLayout();
             // 
@@ -40,7 +41,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Tahoma", 15F, FontStyle.Regular, GraphicsUnit.Pixel);
-            label1.Location = new Point(49, 14);
+            label1.Location = new Point(16, 14);
             label1.Name = "label1";
             label1.Size = new Size(52, 18);
             label1.TabIndex = 0;
@@ -49,7 +50,7 @@
             // textBox1
             // 
             textBox1.Font = new Font("Tahoma", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            textBox1.Location = new Point(107, 12);
+            textBox1.Location = new Point(74, 12);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(145, 24);
             textBox1.TabIndex = 1;
@@ -81,15 +82,27 @@
             tabPage2.Location = new Point(4, 28);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(327, 479);
+            tabPage2.Size = new Size(327, 679);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Microsoft JhengHei UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            button1.Location = new Point(242, 9);
+            button1.Name = "button1";
+            button1.Size = new Size(91, 27);
+            button1.TabIndex = 3;
+            button1.Text = "取消";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // ChairForm
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(359, 774);
+            Controls.Add(button1);
             Controls.Add(tabControl1);
             Controls.Add(textBox1);
             Controls.Add(label1);
@@ -116,5 +129,6 @@
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
+        private Button button1;
     }
 }

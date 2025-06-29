@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="AvatarForm.Designer.cs~RF5ce8ad90.TMP" />
     <None Remove="AvatarFormDraw.cs~RF517cfa47.TMP" />
   </ItemGroup>
 

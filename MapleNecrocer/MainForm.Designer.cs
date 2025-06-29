@@ -56,7 +56,7 @@ namespace MapleNecrocer
             // OpenFolderButton
             // 
             OpenFolderButton.Font = new Font("Verdana", 7F);
-            OpenFolderButton.Location = new Point(120, 8);
+            OpenFolderButton.Location = new Point(131, 8);
             OpenFolderButton.Name = "OpenFolderButton";
             OpenFolderButton.Size = new Size(41, 23);
             OpenFolderButton.TabIndex = 0;
@@ -375,11 +375,11 @@ namespace MapleNecrocer
             // 
             label4.AutoSize = true;
             label4.Font = new Font("微軟正黑體", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            label4.Location = new Point(12, 11);
+            label4.Location = new Point(4, 9);
             label4.Name = "label4";
-            label4.Size = new Size(105, 20);
+            label4.Size = new Size(121, 20);
             label4.TabIndex = 12;
-            label4.Text = "楓之谷資料夾";
+            label4.Text = "新楓之谷資料夾";
             // 
             // MainForm
             // 
@@ -392,13 +392,12 @@ namespace MapleNecrocer
             Font = new Font("Microsoft JhengHei UI", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
             Icon = (Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
-            MaximizeBox = false;
-            MaximumSize = new Size(1193, 960);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ArtaleAvatarMaker";
             Load += MainForm_Load;
             KeyDown += MainForm_KeyDown;
+            Resize += MainForm_Resize;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -416,7 +415,7 @@ namespace MapleNecrocer
         public Label label4;
         public Button MountButton;
         public Button CashEffectButton;
-        private Button MorphButton;
+        public Button MorphButton;
         public Button MedalButton;
         public Button TitleButton;
         public Button RingButton;

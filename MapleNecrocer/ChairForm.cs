@@ -39,14 +39,14 @@ public partial class ChairForm : Form
         if (ItemEffect.AllList.Contains(ID))
             ItemEffect.Create(ID, EffectType.Chair);
         MapleChair.IsUse = true;
-       
-       
+
+
         AvatarForm.SelectedFrame = true;
-        AvatarForm.SelectedAction="sit";
-        AvatarForm.SelectedFrameNum=0;
+        AvatarForm.SelectedAction = "sit";
+        AvatarForm.SelectedFrameNum = 0;
 
 
-       
+
     }
 
     private void ChairForm_Shown(object sender, EventArgs e)
@@ -141,6 +141,12 @@ public partial class ChairForm : Form
 
     private void ChairForm_FormClosing(object sender, FormClosingEventArgs e)
     {
-       
+
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+        MapleChair.Remove();
+        MapleChair.IsUse=false;
     }
 }

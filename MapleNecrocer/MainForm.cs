@@ -51,13 +51,13 @@ public partial class MainForm : Form
         RenderForm.TopLevel = false;
         RenderForm.Parent = this;
         RenderForm.Show();
-     
-       
-       
+
+
+
         stringLinker = new StringLinker();
-       
+
         //ToolTipView.KeyDown += new KeyEventHandler(afrm_KeyDown);
-       
+
 
         //  RenderForm.Show();
     }
@@ -68,7 +68,7 @@ public partial class MainForm : Form
     public DataGridViewEx MapListBox;
     public Dictionary<string, string> MapNames = new();
     public StringLinker stringLinker;
-   
+
     DefaultLevel skillDefaultLevel = DefaultLevel.Level0;
     int skillInterval = 32;
     public void CenterToScreen2()
@@ -149,7 +149,7 @@ public partial class MainForm : Form
         Win32.SendMessage(MapListBox.Handle, true);
 
         MapListBox.Refresh();
-       
+
     }
     void WzFileFinding(object sender, FindWzEventArgs e)
     {
@@ -477,7 +477,7 @@ public partial class MainForm : Form
                 case Wz_Type.Character:
                     if ((image = selectedNode.GetValue<Wz_Image>()) == null || !image.TryExtract())
                         return;
-                   
+
                     var gear = Gear.CreateFromNode(image.Node, PluginManager.FindWz);
                     obj = gear;
                     if (gear != null)
@@ -486,7 +486,7 @@ public partial class MainForm : Form
                     }
                     break;
                 case Wz_Type.Item:
-                  
+
                     Wz_Node itemNode = selectedNode;
                     if (Regex.IsMatch(itemNode.FullPathToFile, @"^Item\\(Cash|Consume|Etc|Install|Cash)\\\d{4,6}.img\\\d+$") || Regex.IsMatch(itemNode.FullPathToFile, @"^Item\\Special\\0910.img\\\d+$"))
                     {
@@ -499,7 +499,7 @@ public partial class MainForm : Form
                     }
                     else if (Regex.IsMatch(itemNode.FullPathToFile, @"^Item\\Pet\\\d{7}.img"))
                     {
-                       
+
                         if ((image = selectedNode.GetValue<Wz_Image>()) == null || !image.TryExtract())
                             return;
                         var item = Item.CreateFromNode(image.Node, PluginManager.FindWz);
@@ -564,14 +564,14 @@ public partial class MainForm : Form
                     break;
 
                 case Wz_Type.Etc:
-                
+
                     Wz_Node setItemNode = selectedNode;
                     if (Regex.IsMatch(setItemNode.FullPathToFile, @"^Etc\\SetItemInfo.img\\-?\d+$"))
                     {
                         SetItem setItem;
-                     
-                   
-                        
+
+
+
                     }
                     break;
 
@@ -585,7 +585,7 @@ public partial class MainForm : Form
                     break;
             }
 
-           
+
         }
         else
         {
@@ -603,7 +603,7 @@ public partial class MainForm : Form
                 case "Character":
                     if ((image = selectedNode.GetValue<Wz_Image>()) == null || !image.TryExtract())
                         return;
-                  
+
                     var gear = Gear.CreateFromNode(image.Node, PluginManager.FindWz);
                     obj = gear;
                     if (gear != null)
@@ -612,7 +612,7 @@ public partial class MainForm : Form
                     }
                     break;
                 case "Item":
-                  
+
 
                     Wz_Node itemNode = selectedNode;
                     if (Regex.IsMatch(itemNode.FullPathToFile.Replace("Data\\", ""), @"^Item\\(Cash|Consume|Etc|Install|Cash)\\\d{4,6}.img\\\d+$") || Regex.IsMatch(itemNode.FullPathToFile, @"^Item\\Special\\0910.img\\\d+$"))
@@ -626,7 +626,7 @@ public partial class MainForm : Form
                     }
                     else if (Regex.IsMatch(itemNode.FullPathToFile.Replace("Data\\", ""), @"^Item\\Pet\\\d{7}.img"))
                     {
-                       
+
                         if ((image = selectedNode.GetValue<Wz_Image>()) == null || !image.TryExtract())
                             return;
                         var item = Item.CreateFromNode(image.Node, PluginManager.FindWz);
@@ -691,14 +691,14 @@ public partial class MainForm : Form
                     break;
 
                 case "Etc":
-                  
+
                     Wz_Node setItemNode = selectedNode;
                     if (Regex.IsMatch(setItemNode.FullPathToFile, @"^Etc\\SetItemInfo.img\\-?\d+$"))
                     {
                         SetItem setItem;
-                       
-                     
-                                         }
+
+
+                    }
                     break;
                 case "Map":
                     // if (selectedNode.Text.Length == 13 && selectedNode.Text.RightStr(4) == ".img")
@@ -710,7 +710,7 @@ public partial class MainForm : Form
                     break;
             }
 
-          
+
         }
 
     }
@@ -732,15 +732,15 @@ public partial class MainForm : Form
         LeftNum = LeftStr(Map.ID, 1);
         //Node = Wz.GetNode("Map/Map/Map" + LeftNum + "/" + Map.ID + ".img/miniMap");
         Node = Wz.GetNode(NodePath + "/miniMap");
-        
-       
+
+
     }
 
     private void MainForm_Load(object sender, EventArgs e)
     {
 
-       
-       
+
+
         Graphics graphics = this.CreateGraphics();
         float dpiX = graphics.DpiX;
         float dpiY = graphics.DpiY;
@@ -750,7 +750,7 @@ public partial class MainForm : Form
 
     private void OpenFolderButton_Click(object sender, EventArgs e)
     {
-       
+
         if (SelectFolderForm.Instance == null)
             new SelectFolderForm().Show();
         else
@@ -793,9 +793,9 @@ public partial class MainForm : Form
             Pet.Instance.JumpState = JumpState.jsFalling;
         }
 
-       
 
-      
+
+
         EngineFunc.SpriteEngine.Camera.X = PX - Map.DisplaySize.X / 2;
         EngineFunc.SpriteEngine.Camera.Y = PY - (Map.DisplaySize.Y / 2) - 100;
         if (EngineFunc.SpriteEngine.Camera.X > Map.Right)
@@ -808,7 +808,7 @@ public partial class MainForm : Form
             EngineFunc.SpriteEngine.Camera.Y = Map.Top;
 
         Map.OffsetY = (Map.DisplaySize.Y - 600) / 2;
-       
+
         EngineFunc.SpriteEngine.Move(1);
 
         Game.Player.JumpState = JumpState.jsFalling;
@@ -861,14 +861,14 @@ public partial class MainForm : Form
             LoadedEff = true;
         }
 
-       
+
     }
 
     static bool LoadedEff;
     private void LoadMapButton_Click(object sender, EventArgs e)
     {
         LoadMap();
-       
+
     }
 
     [DllImport("User32.dll", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
@@ -877,9 +877,9 @@ public partial class MainForm : Form
     public static void SetScreenNormal()
     {
         RenderFormDraw.ScreenMode = ScreenMode.Normal;
-      
-       // Map.DisplaySize.X = Split[0].ToInt();
-       // Map.DisplaySize.Y = Split[1].ToInt();
+
+        // Map.DisplaySize.X = Split[0].ToInt();
+        // Map.DisplaySize.Y = Split[1].ToInt();
         bool Result;
         Result = MoveWindow(MainForm.Instance.Handle, MainForm.Instance.Left, MainForm.Instance.Top, Map.DisplaySize.X + 287, Map.DisplaySize.Y + 152, true);
         //this.Width = Map.DisplaySize.X + 283;
@@ -908,7 +908,7 @@ public partial class MainForm : Form
 
     private void SerachMapBox_TextChanged(object sender, EventArgs e)
     {
-       
+
     }
 
     private void MobButton_Click(object sender, EventArgs e)
@@ -925,29 +925,29 @@ public partial class MainForm : Form
             case "ViewButton": ShowForm(ViewForm.Instance, () => new ViewForm().Show()); break;
             case "MobButton": ShowForm(MobForm.Instance, () => new MobForm().Show()); break;
             case "NpcButton": ShowForm(NpcForm.Instance, () => new NpcForm().Show()); break;
-           // case "AvatarButton": ShowForm(AvatarForm.Instance, () => new AvatarForm().Show()); break;
+            // case "AvatarButton": ShowForm(AvatarForm.Instance, () => new AvatarForm().Show()); break;
             case "ChairButton": ShowForm(ChairForm.Instance, () => new ChairForm().Show()); break;
             case "MountButton": ShowForm(MountForm.Instance, () => new MountForm().Show()); break;
             case "CashEffectButton": ShowForm(CashEffectForm.Instance, () => new CashEffectForm().Show()); break;
             case "MorphButton": ShowForm(MorphForm.Instance, () => new MorphForm().Show()); break;
-            
-          
+
+
             case "MedalButton": ShowForm(MedalForm.Instance, () => new MedalForm().Show()); break;
             case "TitleButton": ShowForm(TitleForm.Instance, () => new TitleForm().Show()); break;
             case "RingButton": ShowForm(RingForm.Instance, () => new RingForm().Show()); break;
             case "PetButton": ShowForm(PetForm.Instance, () => new PetForm().Show()); break;
-        
-           
-            
+
+
+
             case "ConsumeButton": ShowForm(ConsumeForm.Instance, () => new ConsumeForm().Show()); break;
-           
-           
+
+
             case "TotemEffectButton": ShowForm(TotemEffectForm.Instance, () => new TotemEffectForm().Show()); break;
             case "SoulEffectButton": ShowForm(SoulEffectForm.Instance, () => new SoulEffectForm().Show()); break;
-           
-            
-            
-           
+
+
+
+
             case "EffectRingButton": ShowForm(EffectRingForm.Instance, () => new EffectRingForm().Show()); break;
             case "ChatRingButton": ShowForm(ChatRingForm.Instance, () => new ChatRingForm().Show()); break;
             case "EffectButton": ShowForm(EffectForm.Instance, () => new EffectForm().Show()); break;
@@ -958,26 +958,26 @@ public partial class MainForm : Form
     {
         if (e.Alt)
             e.Handled = true;
-       
+
     }
 
     private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
-      
+
     }
 
     private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
     {
-       
+
     }
 
     private List<PictureBox> PictureBoxList = new();
     private System.Windows.Forms.ToolTip ToolTip = new();
     private void WorldMapListGrid_CellClick(object sender, DataGridViewCellEventArgs e)
     {
-       
 
-     
+
+
 
 
     }
@@ -1000,9 +1000,13 @@ public partial class MainForm : Form
 
     }
 
-  
-   
-
-   
+    private void MainForm_Resize(object sender, EventArgs e)
+    {
+        if (AvatarForm.Instance != null)
+        {
+            AvatarForm.Instance.Width = this.Width - 50;
+            AvatarForm.Instance.Height = this.Height - 140;
+        }
+    }
 }
 
