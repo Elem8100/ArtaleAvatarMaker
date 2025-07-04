@@ -1200,6 +1200,6 @@
         private System.Windows.Forms.Timer timer1;
         private Label label9;
         private CheckBox checkBox1;
-        private Button SavePsdButton;
+        public Button SavePsdButton;
     }
 }

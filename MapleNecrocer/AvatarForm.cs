@@ -10,6 +10,7 @@ using Aspose.PSD.FileFormats.Psd.Layers;
 using BlendMode = MonoGame.SpriteEngine.BlendMode;
 using DevComponents.DotNetBar;
 using static System.Windows.Forms.AxHost;
+
 namespace MapleNecrocer;
 public partial class AvatarForm : Form
 {
@@ -94,9 +95,11 @@ public partial class AvatarForm : Form
     public DataGridViewEx SearchGrid;
     private List<Rectangle> FrameBound = new();
     public static bool debugDraw = false;
-    Dictionary<string, (int x, int y)> OriginData = new();
+    public Dictionary<string, (int RedPointX, int RedPointY, int DrawPosX, int DrawPosY)> OriginData = new();
     List<string> FileNameList = new();
+    public List<string> FrameNameList = new();
 
+    public List<ImageForm> ImageFormList = new();
     void AddInventory()
     {
         if (Inventory.Columns.Count == 4)
@@ -287,124 +290,131 @@ public partial class AvatarForm : Form
         var license = new Aspose.PSD.License();
         license.SetLicense(@"License-pro.txt");
         //Artale 紅點位置資料
-        OriginData.Add("walk1.0.psd", (128, 130));
-        OriginData.Add("walk1.1.psd", (378, 130));
-        OriginData.Add("walk1.2.psd", (628, 130));
-        OriginData.Add("walk1.3.psd", (878, 132 - 2));
+        int OffsetY = 0;
+
+        OriginData.Add("walk1.0", (128, 130 + OffsetY, 128, 130 + OffsetY));
+        OriginData.Add("walk1.1", (378, 130 + OffsetY, 378, 130 + OffsetY));
+        OriginData.Add("walk1.2", (628, 130 + OffsetY, 628, 130 + OffsetY));
+        OriginData.Add("walk1.3", (878, 132 + OffsetY, 878, 132 - 2 + OffsetY));
         //
-        OriginData.Add("stabO1.0.psd", (1386 - 1, 133 - 3));
-        OriginData.Add("stabO1.1.psd", (1639 + 8, 135 - 5));
+        OriginData.Add("stabO1.0", (1386, 133 + OffsetY, 1386 - 1, 133 - 3 + OffsetY));
+        OriginData.Add("stabO1.1", (1639, 135 + OffsetY, 1639 + 8, 135 - 5 + OffsetY));
         //
-        OriginData.Add("stabO2.0.psd", (2137 - 1, 130));
-        OriginData.Add("stabO2.1.psd", (2390 + 10, 134 - 4));
+        OriginData.Add("stabO2.0", (2137, 130 + OffsetY, 2137 - 1, 130 + OffsetY));
+        OriginData.Add("stabO2.1", (2390, 134 + OffsetY, 2390 + 10, 134 - 4 + OffsetY));
         //
-        OriginData.Add("walk2.0.psd", (128, 380));
-        OriginData.Add("walk2.1.psd", (378, 380));
-        OriginData.Add("walk2.2.psd", (628, 380));
-        OriginData.Add("walk2.3.psd", (878, 382 - 2));
+        OriginData.Add("walk2.0", (128, 380 + OffsetY, 128, 380 + OffsetY));
+        OriginData.Add("walk2.1", (378, 380 + OffsetY, 378, 380 + OffsetY));
+        OriginData.Add("walk2.2", (628, 380 + OffsetY, 628, 380 + OffsetY));
+        OriginData.Add("walk2.3", (878, 382 + OffsetY, 878, 382 - 2 + OffsetY));
         //
-        OriginData.Add("stabT1.0.psd", (1389 + 3, 381 - 1));
-        OriginData.Add("stabT1.1.psd", (1626 + 18, 382 - 2));
-        OriginData.Add("stabT1.2.psd", (1886 + 23, 386 - 6));
+        OriginData.Add("stabT1.0", (1389, 381 + OffsetY, 1389 + 3, 381 - 1 + OffsetY));
+        OriginData.Add("stabT1.1", (1626, 382 + OffsetY, 1626 + 18, 382 - 2 + OffsetY));
+        OriginData.Add("stabT1.2", (1886, 386 + OffsetY, 1886 + 23, 386 - 6 + OffsetY));
         //
-        OriginData.Add("stand1.0.psd", (126 + 2, 629 + 1));
-        OriginData.Add("stand1.1.psd", (377 + 1, 630));
-        OriginData.Add("stand1.2.psd", (628, 629 + 1));
+        OriginData.Add("stand1.0", (126, 629 + OffsetY, 126 + 2, 629 + 1 + OffsetY));
+        OriginData.Add("stand1.1", (377, 630 + OffsetY, 377 + 1, 630 + OffsetY));
+        OriginData.Add("stand1.2", (628, 629 + OffsetY, 628, 629 + 1 + OffsetY));
         //
-        OriginData.Add("stabT2.0.psd", (1387 - 4, 632 - 2));
-        OriginData.Add("stabT2.1.psd", (1630 + 4, 634 - 4));
-        OriginData.Add("stabT2.2.psd", (1889 + 13, 636 - 6));
+        OriginData.Add("stabT2.0", (1387, 632 + OffsetY, 1387 - 4, 632 - 2 + OffsetY));
+        OriginData.Add("stabT2.1", (1630, 634 + OffsetY, 1630 + 4, 634 - 4 + OffsetY));
+        OriginData.Add("stabT2.2", (1889, 636 + OffsetY, 1889 + 13, 636 - 6 + OffsetY));
         //
-        OriginData.Add("stand2.0.psd", (126 + 2, 879 + 1));
-        OriginData.Add("stand2.1.psd", (377 + 1, 880));
-        OriginData.Add("stand2.2.psd", (628, 879 + 1));
+        OriginData.Add("stand2.0", (126, 879 + OffsetY, 126 + 2, 879 + 1 + OffsetY));
+        OriginData.Add("stand2.1", (377, 880 + OffsetY, 377 + 1, 880 + OffsetY));
+        OriginData.Add("stand2.2", (628, 879 + OffsetY, 628, 879 + 1 + OffsetY));
         //
-        OriginData.Add("proneStab.0.psd", (1396 + 1, 897 - 17));
-        OriginData.Add("proneStab.1.psd", (1646 + 1, 897 - 17));
+        OriginData.Add("proneStab.0", (1396, 897 + OffsetY, 1396 + 1, 897 - 17 + OffsetY));
+        OriginData.Add("proneStab.1", (1646, 897 + OffsetY, 1646 + 1, 897 - 17 + OffsetY));
         //
-        OriginData.Add("alert.0.psd", (139 - 3, 1132 - 2));
-        OriginData.Add("alert.1.psd", (389 - 3, 1131 - 1));
-        OriginData.Add("alert.2.psd", (639 - 3, 1130));
+        OriginData.Add("alert.0", (139, 1132 + OffsetY, 139 - 3, 1132 - 2 + OffsetY));
+        OriginData.Add("alert.1", (389, 1131 + OffsetY, 389 - 3, 1131 - 1 + OffsetY));
+        OriginData.Add("alert.2", (639, 1130 + OffsetY, 639 - 3, 1130 + OffsetY));
         //
-        OriginData.Add("stabTF.2.psd", (1891 + 12, 1120 + 26));
+        OriginData.Add("stabTF.2", (1891, 1120 + OffsetY, 1891 + 12, 1120 + 26 + OffsetY));
         //
-        OriginData.Add("swingO1.0.psd", (132 - 5, 1384 - 4));
-        OriginData.Add("swingO1.1.psd", (384 + 2, 1380));
-        OriginData.Add("swingO1.2.psd", (621 + 23, 1381 - 1));
+        OriginData.Add("swingO1.0", (132, 1384 + OffsetY, 132 - 5, 1384 - 4 + OffsetY));
+        OriginData.Add("swingO1.1", (384, 1380 + OffsetY, 384 + 2, 1380 + OffsetY));
+
+        ///******************************************
+        OriginData.Add("swingO1.2", (621, 1383 + OffsetY, 621 + 23, 1383 - 3 + OffsetY));
         //
-        OriginData.Add("fly.0.psd", (1384 - 2, 1376 + 4));
-        OriginData.Add("fly.1.psd", (1638 - 2, 1376 + 4));
+        OriginData.Add("fly.0", (1384, 1376 + OffsetY, 1384 - 2, 1376 + 4 + OffsetY));
+        OriginData.Add("fly.1", (1638, 1376 + OffsetY, 1638 - 2, 1376 + 4 + OffsetY));
         //
-        OriginData.Add("jump.0.psd", (2132 - 1, 1382 - 2));
+        OriginData.Add("jump.0", (2132, 1382 + OffsetY, 2132 - 1, 1382 - 2 + OffsetY));
         //
-        OriginData.Add("swingO2.0.psd", (138, 1630));
-        OriginData.Add("swingO2.1.psd", (385 + 2, 1632 - 2));
-        OriginData.Add("swingO2.2.psd", (633 + 5, 1634 - 4));
+        OriginData.Add("swingO2.0", (138, 1630 + OffsetY, 138, 1630 + OffsetY));
+        OriginData.Add("swingO2.1", (385, 1632 + OffsetY, 385 + 2, 1632 - 2 + OffsetY));
+        OriginData.Add("swingO2.2", (633, 1634 + OffsetY, 633 + 5, 1634 - 4 + OffsetY));
         //
-        OriginData.Add("shoot1.0.psd", (1390 - 2, 1631 - 1));
-        OriginData.Add("shoot1.1.psd", (1640 - 2, 1631 - 1));
-        OriginData.Add("shoot1.2.psd", (1890 - 2, 1631 - 1));
+        OriginData.Add("shoot1.0", (1390, 1631 + OffsetY, 1390 - 2, 1631 - 1 + OffsetY));
+        OriginData.Add("shoot1.1", (1640, 1631 + OffsetY, 1640 - 2, 1631 - 1 + OffsetY));
+        OriginData.Add("shoot1.2", (1890, 1631 + OffsetY, 1890 - 2, 1631 - 1 + OffsetY));
         //
-        OriginData.Add("shootF.0.psd", (2391 - 3, 1631 - 1));
-        OriginData.Add("shootF.1.psd", (2638 - 3, 1632 - 2));
+        OriginData.Add("shootF.0", (2391, 1631 + OffsetY, 2391 - 3, 1631 - 1 + OffsetY));
+        OriginData.Add("shootF.1", (2638, 1632 + OffsetY, 2638 - 3, 1632 - 2 + OffsetY));
         //
-        OriginData.Add("swingO3.0.psd", (131 + 2, 1884 - 4));
-        OriginData.Add("swingO3.1.psd", (384 + 18, 1883 - 3));
-        OriginData.Add("swingO3.2.psd", (628 + 24, 1884 - 4));
+        OriginData.Add("swingO3.0", (131, 1884 + OffsetY, 131 + 2, 1884 - 4 + OffsetY));
+        OriginData.Add("swingO3.1", (384, 1883 + OffsetY, 384 + 18, 1883 - 3 + OffsetY));
+        OriginData.Add("swingO3.2", (628, 1884 + OffsetY, 628 + 24, 1884 - 4 + OffsetY));
         //
-        OriginData.Add("shoot2.0.psd", (1387, 1882 - 2));
-        OriginData.Add("shoot2.1.psd", (1637, 1882 - 2));
-        OriginData.Add("shoot2.2.psd", (1887, 1882 - 2));
-        OriginData.Add("shoot2.3.psd", (2137, 1882 - 2));
-        OriginData.Add("shoot2.4.psd", (2387, 1882 - 2));
+        OriginData.Add("shoot2.0", (1387, 1882 + OffsetY, 1387, 1882 - 2 + OffsetY));
+        OriginData.Add("shoot2.1", (1637, 1882 + OffsetY, 1637, 1882 - 2 + OffsetY));
+        OriginData.Add("shoot2.2", (1887, 1882 + OffsetY, 1887, 1882 - 2 + OffsetY));
+        OriginData.Add("shoot2.3", (2137, 1882 + OffsetY, 2137, 1882 - 2 + OffsetY));
+        OriginData.Add("shoot2.4", (2387, 1882 + OffsetY, 2387, 1882 - 2 + OffsetY));
         //
-        OriginData.Add("swingOF.0.psd", (135 + 1, 2133 - 3));
-        OriginData.Add("swingOF.1.psd", (384 + 7, 2125 + 11));
-        OriginData.Add("swingOF.2.psd", (638 + 21, 2129 + 5));
-        OriginData.Add("swingOF.3.psd", (880 + 33, 2138 - 8));
+        OriginData.Add("swingOF.0", (135, 2133 + OffsetY, 135 + 1, 2133 - 3 + OffsetY));
+        OriginData.Add("swingOF.1", (384, 2125 + OffsetY, 384 + 7, 2125 + 11 + OffsetY));
+        OriginData.Add("swingOF.2", (638, 2129 + OffsetY, 638 + 21, 2129 + 5 + OffsetY));
+        OriginData.Add("swingOF.3", (880, 2138 + OffsetY, 880 + 33, 2138 - 8 + OffsetY));
         //
-        OriginData.Add("swingT1.0.psd", (126 + 2, 2379 + 1));
-        OriginData.Add("swingT1.1.psd", (384 + 7, 2382 - 2));
-        OriginData.Add("swingT1.2.psd", (623 + 17, 2383 - 3));
+        OriginData.Add("swingT1.0", (126, 2379 + OffsetY, 126 + 2, 2379 + 1 + OffsetY));
+        OriginData.Add("swingT1.1", (384, 2382 + OffsetY, 384 + 7, 2382 - 2 + OffsetY));
+        OriginData.Add("swingT1.2", (623, 2383 + OffsetY, 623 + 17, 2383 - 3 + OffsetY));
         //
-        OriginData.Add("swingP1.0.psd", (1377 + 1, 2380));
-        OriginData.Add("swingP1.1.psd", (1634 + 7, 2383 - 3));
-        OriginData.Add("swingP1.2.psd", (1837 + 53, 2384 - 4));
+        OriginData.Add("swingP1.0", (1377, 2380 + OffsetY, 1377 + 1, 2380 + OffsetY));
+        OriginData.Add("swingP1.1", (1634, 2383 + OffsetY, 1634 + 7, 2383 - 3 + OffsetY));
+        OriginData.Add("swingP1.2", (1873, 2384 + OffsetY, 1873 + 17, 2384 - 4 + OffsetY));
         //
-        OriginData.Add("swingT2.0.psd", (137 + 2, 2632 - 2));
-        OriginData.Add("swingT2.1.psd", (383 + 6, 2632 - 2));
-        OriginData.Add("swingT2.2.psd", (624 + 15, 2634 - 4));
+        OriginData.Add("swingT2.0", (137, 2632 + OffsetY, 137 + 2, 2632 - 2 + OffsetY));
+        OriginData.Add("swingT2.1", (383, 2632 + OffsetY, 383 + 6, 2632 - 2 + OffsetY));
+        OriginData.Add("swingT2.2", (624, 2634 + OffsetY, 624 + 15, 2634 - 4 + OffsetY));
         //
-        OriginData.Add("swingP2.0.psd", (1386 + 1, 2630));
-        OriginData.Add("swingP2.1.psd", (1632 + 5, 2632 - 2));
-        OriginData.Add("swingP2.2.psd", (1874 + 11, 2634 - 4));
+        OriginData.Add("swingP2.0", (1386, 2630 + OffsetY, 1386 + 1, 2630 + OffsetY));
+        OriginData.Add("swingP2.1", (1634, 2632 + OffsetY, 1632 + 5, 2632 - 2 + OffsetY));
+        OriginData.Add("swingP2.2", (1874, 2634 + OffsetY, 1874 + 11, 2634 - 4 + OffsetY));
         //
-        OriginData.Add("swingT3.0.psd", (134 - 5, 2882 - 2));
-        OriginData.Add("swingT3.1.psd", (380 + 4, 2884 - 4));
-        OriginData.Add("swingT3.2.psd", (624 + 7, 2883 - 3));
+        OriginData.Add("swingT3.0", (134, 2882 + OffsetY, 134 - 5, 2882 - 2 + OffsetY));
+        OriginData.Add("swingT3.1", (380, 2884 + OffsetY, 380 + 4, 2884 - 4 + OffsetY));
+        OriginData.Add("swingT3.2", (624, 2883 + OffsetY, 624 + 7, 2883 - 3 + OffsetY));
         //
-        OriginData.Add("swingPF.0.psd", (1373 + 6, 2885 - 5));
-        OriginData.Add("swingPF.1.psd", (1625 + 6, 2886 - 6));
-        OriginData.Add("swingPF.2.psd", (1883 + 12, 2870 + 26));
-        OriginData.Add("swingPF.3.psd", (2142 + 30, 2884 - 4));
+        OriginData.Add("swingPF.0", (1373, 2885 + OffsetY, 1373 + 6, 2885 - 5 + OffsetY));
+        OriginData.Add("swingPF.1", (1625, 2886 + OffsetY, 1625 + 6, 2886 - 6 + OffsetY));
+        OriginData.Add("swingPF.2", (1883, 2870 + OffsetY, 1883 + 12, 2870 + 26 + OffsetY));
+        OriginData.Add("swingPF.3", (2142, 2884 + OffsetY, 2142 + 30, 2884 - 4 + OffsetY));
         //
 
-        OriginData.Add("sit.0.psd", (2642 - 4, 2886 - 3));
+        OriginData.Add("sit.0", (2642, 2886 + OffsetY, 2642 - 4, 2886 - 3 + OffsetY));
         //
-        OriginData.Add("swingTF.0.psd", (142 - 1, 3129 + 1));
-        OriginData.Add("swingTF.1.psd", (388 + 3, 3128 + 2));
-        OriginData.Add("swingTF.2.psd", (631 + 11, 3132 - 2));
-        OriginData.Add("swingTF.3.psd", (875 + 18, 3135 - 5));
+        OriginData.Add("swingTF.0", (142, 3129 + OffsetY, 142 - 1, 3129 + 1 + OffsetY));
+        OriginData.Add("swingTF.1", (388, 3128 + OffsetY, 388 + 3, 3128 + 2 + OffsetY));
+        OriginData.Add("swingTF.2", (631, 3132 + OffsetY, 631 + 11, 3132 - 2 + OffsetY));
+        OriginData.Add("swingTF.3", (875, 3135 + OffsetY, 875 + 18, 3135 - 5 + OffsetY));
         //
-        OriginData.Add("stabOF.0.psd", (1393 - 10, 3137 - 7));
-        OriginData.Add("stabOF.1.psd", (1633 + 12, 3131 + 1));
-        OriginData.Add("stabOF.2.psd", (1875 + 31, 3135 - 5));
+        OriginData.Add("stabOF.0", (1393, 3137 + OffsetY, 1393 - 10, 3137 - 7 + OffsetY));
+        OriginData.Add("stabOF.1", (1633, 3131 + OffsetY, 1633 + 12, 3131 + 1 + OffsetY));
+        OriginData.Add("stabOF.2", (1875, 3135 + OffsetY, 1875 + 31, 3135 - 5 + OffsetY));
         //
-        OriginData.Add("ladder.0.psd", (130 - 6, 3379 + 1));
-        OriginData.Add("ladder.1.psd", (379 - 8, 3379 - 1));
+        OriginData.Add("ladder.0", (130, 3379 + OffsetY, 130 - 6, 3379 + 1 + OffsetY));
+        OriginData.Add("ladder.1", (379, 3379 + OffsetY, 379 - 8, 3379 - 1 + OffsetY));
         //
-        OriginData.Add("rope.0.psd", (1380 - 8, 3376 + 4));
-        OriginData.Add("rope.1.psd", (1629 - 7, 3382 - 2));
+        OriginData.Add("rope.0", (1380, 3376 + OffsetY, 1380 - 8, 3376 + 4 + OffsetY));
+        OriginData.Add("rope.1", (1629, 3382 + OffsetY, 1629 - 7, 3382 - 2 + OffsetY));
+
+
+
 
 
         for (int i = 1; i <= 20; i++)
@@ -1270,9 +1280,6 @@ public partial class AvatarForm : Form
             }
 
 
-
-
-
             // 必须domove 3次，不然序号会慢一帧
             Game.Player.DoMove(0);
             Game.Player.DoMove(0);
@@ -1397,13 +1404,13 @@ public partial class AvatarForm : Form
             string[] sprite = frameName.Split('.');
             SelectedFrameNum = sprite[1].ToInt();
             SelectedAction = sprite[0];
+         
 
             // 必须domove 3次，不然序号会慢一帧
             Game.Player.DoMove(0);
             Game.Player.DoMove(0);
             Game.Player.DoMove(0);
-
-
+           
             EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(FrameListDraw.AvatarPanelTexture);
             EngineFunc.Canvas.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
             EngineFunc.SpriteEngine.DrawEx("Player", "ItemEffect", "SetEffect", "LabelRingTag", "MedalTag", "NickNameTag",
@@ -1587,81 +1594,46 @@ public partial class AvatarForm : Form
     static int SaveCount;
     private void SavePsdButton_Click(object sender, EventArgs e)
     {
-        AdjustX = 128;
-        AdjustY = 128;
-        AdjustW = 256;
-        AdjustH = 256;
+        AdjustX = 60;//90;
+        AdjustY = 88;//128;
+        AdjustW = 336;//256;
+        AdjustH = 296;//256;
         customAABB_checkBox.Checked = true;
-        SavePsdButton.Text = "儲存中,請稍後...";
+        SavePsdButton.Text = "處理中,請稍後...";
         SavePsdButton.Enabled = false;
         _ExportAllSprite("Temp");
-
-        Bitmap Bmp = new(System.Environment.CurrentDirectory + "\\Temp\\" + "walk1.0.png");
-
-        int Width = Bmp.Width;
-        int Height = Bmp.Height;
-        Bmp.Dispose();
-
-        DirectoryInfo Folder = new DirectoryInfo(System.Environment.CurrentDirectory + "\\Temp\\");
-        foreach (FileInfo File in Folder.GetFiles())
+        
+        new PreViewForm();
+        foreach (var key in OriginData.Keys)
         {
-            if (File.Extension == ".png")
-            {
-                var PsdImage = new PsdImage(Width, Height);
-                var PngStream = new FileStream(File.FullName, FileMode.Open);
-                Layer Layer = null;
-                Layer = new Layer(PngStream);
-                PsdImage.AddLayer(Layer);
-
-                var FileName = System.IO.Path.GetFileNameWithoutExtension(File.FullName);
-                PsdImage.Save(System.Environment.CurrentDirectory + "\\Temp\\" + FileName + ".psd", true);
-                FileNameList.Add(FileName + ".psd");
-
-                PngStream.Close();
-                PngStream.Dispose();
-                PsdImage.Dispose();
-            }
+            var ImageForm = new ImageForm();
+            ImageForm.RedPointX = OriginData[key].RedPointX;
+            ImageForm.RedPointY = OriginData[key].RedPointY;
+            ImageForm.NewRedPointX = OriginData[key].RedPointX;
+            ImageForm.NewRedPointY = OriginData[key].RedPointY;
+            ImageForm.DrawPosX = OriginData[key].DrawPosX;
+            ImageForm.DrawPosY = OriginData[key].DrawPosY;
+            ImageForm.NewDrawPosX = OriginData[key].DrawPosX;
+            ImageForm.NewDrawPosY = OriginData[key].DrawPosY;
+            System.Drawing.Image Image = System.Drawing.Image.FromFile(System.Environment.CurrentDirectory + "\\Temp\\" +  key + ".png");
+            ImageForm.SetBitmap((Bitmap)Image);
+            ImageForm.FrameName = key;
+            ImageForm.Parent = PreViewForm.Instance;
+            ImageForm.Left = OriginData[key].DrawPosX - 188;//158;
+            ImageForm.Top = OriginData[key].DrawPosY - 180;//140;
+            ImageForm.CaptionRectangle = new System.Drawing.Rectangle(0, 0, 250, 250);
+            ImageFormList.Add(ImageForm);
+            Image.Dispose();
         }
-
-        using var Back = (PsdImage)Aspose.PSD.Image.Load(System.Environment.CurrentDirectory + "\\back2.psd");
-
-
-        using var MainPSD = (PsdImage)Aspose.PSD.Image.Load(System.Environment.CurrentDirectory + "\\Avatar_CapeMod.psd");
-        var graphic = new Aspose.PSD.Graphics(MainPSD.Layers[0]);
-        graphic.Clear(new Aspose.PSD.Color());
-
-
-        foreach (var Iter in FileNameList)
-        {
-            if (OriginData.ContainsKey(Iter))
-            {
-                var PsdImage = Aspose.PSD.RasterImage.Load(System.Environment.CurrentDirectory + "\\Temp\\" + Iter);
-                if(Morph.IsUse)
-                  graphic.DrawImage(Back, new Aspose.PSD.Point(OriginData[Iter].x-94, OriginData[Iter].y-135));
-                graphic.DrawImage(PsdImage, new Aspose.PSD.Point(OriginData[Iter].x - 120, OriginData[Iter].y - 140));
-                PsdImage.Dispose();
-            }
-        }
-
-        // MainPSD.Layers[7].DisplayName= "guide_background";
-        // MainPSD.Layers[0].DisplayName= "edithere:cape_capeOverHead_10";
-        /*
-        var layersList = new List<Layer>(MainPSD.Layers);
-        layersList.RemoveAt(1);
-        MainPSD.Layers = layersList.ToArray();
-        */
-        SaveCount += 1;
-        MainPSD.Save(System.Environment.CurrentDirectory + "\\PSD\\" + "NewAvatar" + SaveCount.ToString() + ".psd", true);
-        MessageBox.Show("儲存NewAvatar" + SaveCount.ToString() + ".psd 完成" + "\n" + "存放在PSD資料夾裡面");
-        //"D:/05001.psd", true);
-        customAABB_checkBox.Checked = false;
+        PreViewForm.Instance.Show();
         SavePsdButton.Text = "儲存psd";
-        SavePsdButton.Enabled = true;
+              
+        customAABB_checkBox.Checked = false;
         AdjustX = ScrollBarX.Value;
         AdjustY = ScrollBarY.Value; ;
         AdjustW = ScrollBarW.Value;
         AdjustH = ScrollBarH.Value;
-        MainPSD.Dispose();
+       
     }
 }
 
