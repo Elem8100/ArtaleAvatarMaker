@@ -1039,11 +1039,11 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Tahoma", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            label5.Location = new Point(492, 193);
+            label5.Location = new Point(482, 193);
             label5.Name = "label5";
-            label5.Size = new Size(29, 18);
+            label5.Size = new Size(38, 18);
             label5.TabIndex = 25;
-            label5.Text = "Ear";
+            label5.Text = "耳朵";
             // 
             // EarListBox
             // 

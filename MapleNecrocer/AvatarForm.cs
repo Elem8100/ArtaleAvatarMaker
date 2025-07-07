@@ -1285,6 +1285,15 @@ public partial class AvatarForm : Form
             Game.Player.DoMove(0);
             Game.Player.DoMove(0);
 
+            if (SetEffect.Instance != null)
+            {
+                SetEffect.Instance.DoMove(0);
+            }
+            if (ItemEffect.Instance != null)
+            {
+                ItemEffect.Instance.DoMove(0);
+            }
+
             EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(FrameListDraw.AvatarPanelTexture);
             EngineFunc.Canvas.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
             EngineFunc.SpriteEngine.DrawEx("Player", "ItemEffect", "SetEffect", "LabelRingTag", "MedalTag", "NickNameTag",
@@ -1404,13 +1413,13 @@ public partial class AvatarForm : Form
             string[] sprite = frameName.Split('.');
             SelectedFrameNum = sprite[1].ToInt();
             SelectedAction = sprite[0];
-         
+
 
             // 必须domove 3次，不然序号会慢一帧
             Game.Player.DoMove(0);
             Game.Player.DoMove(0);
             Game.Player.DoMove(0);
-           
+
             EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(FrameListDraw.AvatarPanelTexture);
             EngineFunc.Canvas.GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.Transparent);
             EngineFunc.SpriteEngine.DrawEx("Player", "ItemEffect", "SetEffect", "LabelRingTag", "MedalTag", "NickNameTag",
@@ -1602,7 +1611,7 @@ public partial class AvatarForm : Form
         SavePsdButton.Text = "處理中,請稍後...";
         SavePsdButton.Enabled = false;
         _ExportAllSprite("Temp");
-        
+
         new PreViewForm();
         foreach (var key in OriginData.Keys)
         {
@@ -1615,7 +1624,7 @@ public partial class AvatarForm : Form
             ImageForm.DrawPosY = OriginData[key].DrawPosY;
             ImageForm.NewDrawPosX = OriginData[key].DrawPosX;
             ImageForm.NewDrawPosY = OriginData[key].DrawPosY;
-            System.Drawing.Image Image = System.Drawing.Image.FromFile(System.Environment.CurrentDirectory + "\\Temp\\" +  key + ".png");
+            System.Drawing.Image Image = System.Drawing.Image.FromFile(System.Environment.CurrentDirectory + "\\Temp\\" + key + ".png");
             ImageForm.SetBitmap((Bitmap)Image);
             ImageForm.FrameName = key;
             ImageForm.Parent = PreViewForm.Instance;
@@ -1627,13 +1636,13 @@ public partial class AvatarForm : Form
         }
         PreViewForm.Instance.Show();
         SavePsdButton.Text = "儲存psd";
-              
+
         customAABB_checkBox.Checked = false;
         AdjustX = ScrollBarX.Value;
         AdjustY = ScrollBarY.Value; ;
         AdjustW = ScrollBarW.Value;
         AdjustH = ScrollBarH.Value;
-       
+
     }
 }
 
