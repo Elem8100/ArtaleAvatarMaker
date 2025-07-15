@@ -141,7 +141,7 @@ public class Player : JumperSprite
         JumpState = JumpState.jsFalling;
         StandType = "stand1";
         WalkType = "walk1";
-        
+
         // IntMove = true;
     }
     static bool Loaded;
@@ -160,7 +160,7 @@ public class Player : JumperSprite
         Game.Player.AvatarEngine.Camera.Y = 20 - 400;
 
         int PX = 0, PY = 0;
-       
+
         Game.Player.X = PX;
         Game.Player.Y = PY;
         Foothold BelowFH = null;
@@ -188,14 +188,14 @@ public class Player : JumperSprite
             Player.EqpList.Add(DefaultEqps[I]);
         }
 
-        if(Wz.HasHardCodedStrings)
+        if (Wz.HasHardCodedStrings)
             Wz.DumpData(Wz.GetNodeA("Character/00002000.img"), Wz.EquipData, Wz.EquipImageLib);
         else
             Wz.DumpData(Wz.GetNodeA("Character/00002001.img"), Wz.EquipData, Wz.EquipImageLib);
 
         Game.Player.AttackAction = Game.Player.AttackActions[0];
         AfterImage.Load(Game.Player.AfterImageStr, "0");
-       
+
         Loaded = true;
     }
 
@@ -217,7 +217,7 @@ public class Player : JumperSprite
     public bool Attack;
     bool SkillDone;
     int NameTagTargetIndex;
-  
+
     public LadderType LadderType;
     public string StandType, WalkType;
     public List<AvatarParts> PartSpriteList = new();
@@ -412,7 +412,7 @@ public class Player : JumperSprite
                             {
                                 if ((MapleChair.IsUse) || (TamingMob.IsUse))
                                 {
-                                    if (((Part == PartName.CashWeapon) || (Part == PartName.Weapon)) && Game.Player.Action=="sit")
+                                    if ( Part == PartName.Weapon && Game.Player.Action == "sit")
                                         Sprite.Visible = false;
                                     else
                                         Sprite.Visible = true;
@@ -435,6 +435,8 @@ public class Player : JumperSprite
                             }
                             if (Wz.EquipData.ContainsKey(Path))
                                 Sprite.ImageNode = Wz.EquipData[Path];
+
+
                             //Sprite.IntMove= true;
                             Sprite.Tag = 1;
                             Sprite.Value = 1;
@@ -509,8 +511,8 @@ public class Player : JumperSprite
     public override void DoMove(float Delta)
     {
         base.DoMove(Delta);
-        
-       // Keyboard.GetState();
+
+        // Keyboard.GetState();
         if (Map.GameMode == GameMode.Viewer)
             return;
         EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(AvatarTargetTexture);
@@ -526,11 +528,11 @@ public class Player : JumperSprite
             DoJump = true;
         }
 
-       
+
         Vector2 Below = new();
         Foothold BelowFH = null, WallFH = null;
-      
-       
+
+
         if (Map.FadeScreen.AlphaCounter <= 2)
             Map.FadeScreen.DoFade = false;
         // Alt + left
@@ -607,7 +609,7 @@ public class Player : JumperSprite
             if ((X < Map.Left + 20) || (Attack) && (JumpState == JumpState.jsNone))
                 SpeedL = 0;
 
-           
+
 
 
             Direction = GetAngle256(X2, Y2, X1, Y1);
@@ -655,7 +657,7 @@ public class Player : JumperSprite
             if ((X > Map.Right - 20) || (Attack) && (JumpState == JumpState.jsNone))
                 SpeedR = 0;
 
-           
+
             Direction = GetAngle256(X1, Y1, X2, Y2);
             if (!FH.IsWall())
             {
@@ -813,7 +815,7 @@ public class AvatarParts : SpriteEx
     public bool ChangeFrame;
     Vector2 origin;
     int Flip;
-    Wz_Vector MoveOffset=new(0,0);
+    Wz_Vector MoveOffset = new(0, 0);
     int Counter;
     public static List<string> ZMap = new();
 
@@ -826,7 +828,7 @@ public class AvatarParts : SpriteEx
 
     }
     public void UpdateFrame()
-    { 
+    {
         string C = "Character/";
         float BodyDelay, FaceDelay;
         PartName Part = Equip.GetPart(ID);
@@ -841,7 +843,7 @@ public class AvatarParts : SpriteEx
             string AfterImagePath = "Character/Afterimage/" + Owner.AfterImageStr + ".img/0/" + State + "/" + Frame + "/0";
             if (Wz.HasDataE(AfterImagePath))
             {
-              
+
                 AfterImage.Create(AfterImagePath);
             }
         }
@@ -873,9 +875,9 @@ public class AvatarParts : SpriteEx
                 MoveOffset.Y = 0;
             }
         }
-        
-       
-        
+
+
+
         if (FlipX)
             Owner.MoveX = Owner.X - 1 - MoveOffset.X;
         else
@@ -910,7 +912,7 @@ public class AvatarParts : SpriteEx
             Frame = S[1].ToInt();
         }
         */
-        
+
 
 
         if (AvatarForm.SelectedFrame && !Owner.OtherPlayer)
@@ -921,9 +923,9 @@ public class AvatarParts : SpriteEx
             AnimEnd = false;
             State = AvatarForm.SelectedAction;
             Frame = AvatarForm.SelectedFrameNum;
-           
+
         }
-     
+
 
 
         /*
@@ -1259,9 +1261,9 @@ public class AvatarParts : SpriteEx
         }
     }
 
-   
 
-    
+
+
 
     public override void DoMove(float Delta)
     {
@@ -1277,7 +1279,7 @@ public class AvatarParts : SpriteEx
         Owner.Attack = IsAttack();
         Owner.Action = State;
 
-        
+
         PartName Part = Equip.GetPart(ID);
 
         if (TamingMob.IsUse)
@@ -1293,9 +1295,9 @@ public class AvatarParts : SpriteEx
             // Exit;
         }
 
-       
 
-       
+
+
         if ((Owner.JumpState != JumpState.jsNone) && (!IsAttack()) && (!TamingMob.IsUse))
         {
             Frame = 0;
@@ -1305,11 +1307,11 @@ public class AvatarParts : SpriteEx
         if ((Owner.JumpState == JumpState.jsNone) && (State == "jump") && (!Keyboard.KeyDown(Input.LeftAlt)))
             State = Owner.StandType;
         // press jump+ left(right) key
-          
+
 
         if (AnimEnd)
         {
-           
+
             if (State == "proneStab")
             {
                 Time = 0;
@@ -1327,9 +1329,9 @@ public class AvatarParts : SpriteEx
             AlertCount = 0;
         }
 
-      
 
-       
+
+
 
         if (Keyboard.KeyDown(Input.F1))
         {
@@ -1367,19 +1369,30 @@ public class AvatarParts : SpriteEx
             Expression = "stunned";
         }
 
-        
+        Visible = true;
 
-       
-          // if ((TamingMob.IsUse) || (MapleChair.IsUse))
-         if(Owner.Action=="sit")
+        
+        // if ((TamingMob.IsUse) || (MapleChair.IsUse))
+        if (Owner.Action == "sit")
         {
-            if (((Part == PartName.Weapon) || (Part == PartName.CashWeapon)) && Owner.Action=="sit" )
-                Visible = false;
+            if (Part == PartName.CashWeapon )
+            {
+                if (MapleChair.ShowWeapon==true)
+                { 
+                    Visible =true;
+                  
+                }
+                else if (MapleChair.ShowWeapon==false)
+                {
+                    Visible =false;
+                }
+            }
         }
         else
         {
-            Visible = true;
+            Visible=true;
         }
+        
 
         //Game.Player.FlipX = FlipX;
         if ((State == "ladder") || (State == "rope"))
@@ -1387,11 +1400,12 @@ public class AvatarParts : SpriteEx
         else
             MapleChair.CanUse = true;
 
-        if (MapleChair.IsUse) 
+        if (MapleChair.IsUse)
         {
             State = MapleChair.CharacterAction;
-             //State = "sit.0";
+            //State = "sit.0";
         }
+
         UpdateFrame();
 
     }
@@ -1399,6 +1413,7 @@ public class AvatarParts : SpriteEx
 
     public override void DoDraw()
     {
+
         if (ImageNode == null)
             return;
         /*

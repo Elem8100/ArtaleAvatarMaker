@@ -13,7 +13,11 @@ public class MapleChair : SpriteEx
 {
     public MapleChair(Sprite Parent) : base(Parent)
     {
+        Instance = this;
     }
+
+    public static MapleChair Instance;
+    public static bool ShowWeapon;
     string Path;
     int Frame;
     int FTime;
@@ -71,6 +75,23 @@ public class MapleChair : SpriteEx
         if (Wz.HasNode("Item/Cash/0520.img/" + ID))
         {
             Entry = Wz.GetNode("Item/Cash/0520.img");
+        }
+
+
+        if (MapleChair.Instance != null )
+        {
+           
+            if (Entry.HasNode(ID + "/info/invisibleWeapon"))
+            {
+               
+                MapleChair.ShowWeapon = false;
+               
+            }
+            else
+            {
+            
+                MapleChair.ShowWeapon = true;
+            }
         }
 
         CharacterAction = "sit";
@@ -302,7 +323,7 @@ public class MapleChair : SpriteEx
                     Offset.X = -origin.X - TamingMob.Navel.X;
                     break;
             }
-            Offset.Y = -origin.Y - TamingMob.Navel.Y;
+            Offset.Y = -origin.Y - TamingMob.Navel.Y+ChairForm.AdujstY;
         }
         else
         {
@@ -315,21 +336,21 @@ public class MapleChair : SpriteEx
                     Offset.X = -origin.X;
                     break;
             }
-            Offset.Y = -origin.Y;
+            Offset.Y = -origin.Y+ChairForm.AdujstY;
         }
 
-       
+      
 
 
     }
 
     public override void DoDraw()
     {
-    
-        if(Game.Player.Action==CharacterAction)
+       
+        if (Game.Player.Action == CharacterAction)
             base.DoDraw();
 
-       
+
 
     }
 }

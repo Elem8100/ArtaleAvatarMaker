@@ -319,7 +319,7 @@ public class TamingMob : SpriteEx
                 Flip = 1;
                 break;
         }
-        Offset.Y = -origin.Y;
+        Offset.Y = -origin.Y+ChairForm.AdujstY;
 
         if (Wz.HasDataE(Path + "/map/navel"))
         {
