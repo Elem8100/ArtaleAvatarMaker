@@ -1292,6 +1292,8 @@ public partial class AvatarForm : Form
             if (ItemEffect.Instance != null)
             {
                 ItemEffect.Instance.DoMove(0);
+              //  ItemEffect.Instance.DoMove(0);
+              //  ItemEffect.Instance.DoMove(0);
             }
 
             EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(FrameListDraw.AvatarPanelTexture);

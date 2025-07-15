@@ -13,8 +13,10 @@ public partial class ChairForm : Form
         Instance = this;
     }
     public static ChairForm Instance;
-    public DataGridViewEx ChairListGrid;
 
+    public static int AdujstY;
+    public DataGridViewEx ChairListGrid;
+    public bool WeaponVisible;
     private void ChairForm_Load(object sender, EventArgs e)
     {
 
@@ -35,6 +37,8 @@ public partial class ChairForm : Form
         ItemEffect.Remove(EffectType.Chair);
 
         MapleChair.Create(ID);
+
+
 
         if (ItemEffect.AllList.Contains(ID))
             ItemEffect.Create(ID, EffectType.Chair);
@@ -147,6 +151,17 @@ public partial class ChairForm : Form
     private void button1_Click(object sender, EventArgs e)
     {
         MapleChair.Remove();
-        MapleChair.IsUse=false;
+        MapleChair.IsUse = false;
+    }
+
+    private void textBox2_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
+    {
+        label3.Text=hScrollBar1.Value.ToString();
+        ChairForm.AdujstY= hScrollBar1.Value;
     }
 }
