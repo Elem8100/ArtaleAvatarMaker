@@ -17,7 +17,8 @@ public partial class RingForm : Form
         var ID = DataGrid.Rows[e.RowIndex].Cells[0].Value.ToString();
         LabelRingTag.Delete();
         LabelRingTag.Create(ID);
-        LabelRingTag.Instance.MedalName = Game.Player.Name;
+        LabelRingTag.Instance.MedalName = "                                                              ".Substring(0, hScrollBar1.Value);
+       
         LabelRingTag.Instance.InitData();
         LabelRingTag.ReDraw();
     }
@@ -52,8 +53,8 @@ public partial class RingForm : Form
         Bitmap Bmp = null;
         foreach (var Img in Wz.GetNodes("Character/Ring"))
         {
-            if (Img.Text.LeftStr(6) != "011121" && Img.Text.LeftStr(6) != "011151"  &&
-                Img.Text.LeftStr(6) != "011153" && Img.Text.LeftStr(6) !="011155")
+            if (Img.Text.LeftStr(6) != "011121" && Img.Text.LeftStr(6) != "011151" &&
+                Img.Text.LeftStr(6) != "011153" && Img.Text.LeftStr(6) != "011155")
                 continue;
             if (!Wz.HasNode("Character/Ring/" + Img.Text + "/info/nameTag"))
                 continue;
@@ -96,6 +97,11 @@ public partial class RingForm : Form
 
     private void RingForm_FormClosing(object sender, FormClosingEventArgs e)
     {
-       
+
+    }
+
+    private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
+    {
+           label3.Text=hScrollBar1.Value.ToString();
     }
 }

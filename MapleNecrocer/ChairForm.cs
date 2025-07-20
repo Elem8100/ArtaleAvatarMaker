@@ -35,21 +35,26 @@ public partial class ChairForm : Form
 
         TamingMob.Remove();
         ItemEffect.Remove(EffectType.Chair);
-
+       
         MapleChair.Create(ID);
 
 
-
+        ItemEffect.IsUse = false;
         if (ItemEffect.AllList.Contains(ID))
+        { 
             ItemEffect.Create(ID, EffectType.Chair);
+            ItemEffect.IsUse = true;
+           
+        }
         MapleChair.IsUse = true;
 
 
         AvatarForm.SelectedFrame = true;
         AvatarForm.SelectedAction = "sit";
         AvatarForm.SelectedFrameNum = 0;
-
-
+        hScrollBar1.Value = 0;  
+        label3.Text="0";
+        ChairForm.AdujstY = 0;
 
     }
 
@@ -150,7 +155,12 @@ public partial class ChairForm : Form
 
     private void button1_Click(object sender, EventArgs e)
     {
+
         MapleChair.Remove();
+
+        TamingMob.Remove();
+        ItemEffect.Remove(EffectType.Chair);
+        ItemEffect.IsUse = false;
         MapleChair.IsUse = false;
     }
 

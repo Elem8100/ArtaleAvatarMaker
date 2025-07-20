@@ -62,17 +62,20 @@ public class AvatarFormDraw : MonoGameControl
 
     protected override void Draw()
     {
-       
-        MapleChair.BodyRelMove.X = 0;
-        MapleChair.BodyRelMove.Y = 0;
-        TamingMob.Navel.X = 0;
-        TamingMob.Navel.Y = 0;
 
+        //  MapleChair.BodyRelMove.X = 0;
+        //  MapleChair.BodyRelMove.Y = 0;
+        // TamingMob.Navel.X = 0;
+        // TamingMob.Navel.Y = 0;
+       
         EngineFunc.Canvas.Draw(CheckBoardTexture, 0, 0);
         // Editor.graphics.Clear(Color.Aqua);
         int WX = (int)(Game.Player.X - EngineFunc.SpriteEngine.Camera.X - 130 + MapleChair.BodyRelMove.X - TamingMob.Navel.X);
         int WY = (int)(Game.Player.Y - EngineFunc.SpriteEngine.Camera.Y - 160 + MapleChair.BodyRelMove.Y - TamingMob.Navel.Y);
         EngineFunc.Canvas.DrawCropArea(AvatarPanelTexture, 0, 0, new Microsoft.Xna.Framework.Rectangle(WX, WY, WX + 200, WY + 200), 0, 0, 1, 1, 0, false, false, 255, 255, 255, 255, false, BlendMode.NonPremultiplied2);
+
+       
+        
     }
 
 }

@@ -1,15 +1,15 @@
 ﻿
-using Manina.Windows.Forms;
-using Microsoft.Xna.Framework.Graphics;
-
-using WzComparerR2.WzLib;
-using Rectangle = Microsoft.Xna.Framework.Rectangle;
 using Aspose.PSD.FileFormats.Psd;
 using Aspose.PSD.FileFormats.Psd;
 using Aspose.PSD.FileFormats.Psd.Layers;
-using BlendMode = MonoGame.SpriteEngine.BlendMode;
 using DevComponents.DotNetBar;
+using Manina.Windows.Forms;
+using Microsoft.Xna.Framework.Graphics;
+using System.Windows.Forms;
+using WzComparerR2.WzLib;
 using static System.Windows.Forms.AxHost;
+using BlendMode = MonoGame.SpriteEngine.BlendMode;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace MapleNecrocer;
 public partial class AvatarForm : Form
@@ -32,6 +32,7 @@ public partial class AvatarForm : Form
         FrameListDraw.Top = 0;
         FrameListDraw.Parent = panel2;
         Instance = this;
+        (tabControl1.TabPages[5] as TabPage).Enabled = false;
     }
     private string[] AllFrames = {
         "walk1.0", "walk1.1", "walk1.2", "walk1.3",
@@ -647,6 +648,7 @@ public partial class AvatarForm : Form
 
         if (!PartList.Contains(ButtonName))
         {
+
             var Graphic = ImageGrids[PartIndex].CreateGraphics();
             var Font = new System.Drawing.Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
             Graphic.DrawString("Loading...", Font, Brushes.Black, 150, 150);
@@ -1231,6 +1233,12 @@ public partial class AvatarForm : Form
         RenderTarget2D texture = new RenderTarget2D(EngineFunc.Canvas.GraphicsDevice, bound.Width, bound.Height, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
         EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(texture);
 
+
+        float tx = TamingMob.Navel.X;
+        float ty = TamingMob.Navel.Y;
+        int cx_ = MapleChair.BodyRelMove.X;
+        int cy_ = MapleChair.BodyRelMove.Y;
+
         for (int i = 0; i < AllFrames.Length; i++)
         {
             string frameName = AllFrames[i];
@@ -1280,10 +1288,28 @@ public partial class AvatarForm : Form
             }
 
 
+
+            if (AvatarForm.SelectedAction == "sit")
+            {
+                MapleChair.BodyRelMove.X = cx_;
+                MapleChair.BodyRelMove.Y = cy_;
+                TamingMob.Navel.X = tx;
+                TamingMob.Navel.Y = ty;
+            }
+            else
+            {
+                MapleChair.BodyRelMove.X = 0;
+                MapleChair.BodyRelMove.Y = 0;
+                TamingMob.Navel.X = 0;
+                TamingMob.Navel.Y = 0;
+            }
+
+
             // 必须domove 3次，不然序号会慢一帧
             Game.Player.DoMove(0);
             Game.Player.DoMove(0);
             Game.Player.DoMove(0);
+
 
             if (SetEffect.Instance != null)
             {
@@ -1292,8 +1318,8 @@ public partial class AvatarForm : Form
             if (ItemEffect.Instance != null)
             {
                 ItemEffect.Instance.DoMove(0);
-              //  ItemEffect.Instance.DoMove(0);
-              //  ItemEffect.Instance.DoMove(0);
+                //  ItemEffect.Instance.DoMove(0);
+                //  ItemEffect.Instance.DoMove(0);
             }
 
             EngineFunc.Canvas.GraphicsDevice.SetRenderTarget(FrameListDraw.AvatarPanelTexture);

@@ -32,14 +32,17 @@
             button1 = new Button();
             textBox1 = new TextBox();
             label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            hScrollBar1 = new HScrollBar();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.Location = new Point(6, 48);
+            panel1.Location = new Point(6, 78);
             panel1.Name = "panel1";
-            panel1.Size = new Size(345, 519);
+            panel1.Size = new Size(345, 489);
             panel1.TabIndex = 0;
             // 
             // button1
@@ -49,7 +52,7 @@
             button1.Name = "button1";
             button1.Size = new Size(95, 28);
             button1.TabIndex = 6;
-            button1.Text = "Remove";
+            button1.Text = "刪除";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -72,15 +75,48 @@
             label1.TabIndex = 4;
             label1.Text = "Search";
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("微軟正黑體", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            label2.Location = new Point(8, 46);
+            label2.Name = "label2";
+            label2.Size = new Size(42, 19);
+            label2.TabIndex = 7;
+            label2.Text = "長度:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Tahoma", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            label3.Location = new Point(52, 47);
+            label3.Name = "label3";
+            label3.Size = new Size(24, 18);
+            label3.TabIndex = 8;
+            label3.Text = "25";
+            // 
+            // hScrollBar1
+            // 
+            hScrollBar1.Location = new Point(90, 46);
+            hScrollBar1.Maximum = 60;
+            hScrollBar1.Name = "hScrollBar1";
+            hScrollBar1.Size = new Size(220, 20);
+            hScrollBar1.TabIndex = 9;
+            hScrollBar1.Value = 25;
+            hScrollBar1.Scroll += hScrollBar1_Scroll;
+            // 
             // RingForm
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(359, 574);
+            Controls.Add(hScrollBar1);
+            Controls.Add(label3);
+            Controls.Add(label2);
             Controls.Add(button1);
             Controls.Add(textBox1);
             Controls.Add(label1);
             Controls.Add(panel1);
-            Font = new Font("Tahoma", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            Font = new Font("Tahoma", 13F);
             KeyPreview = true;
             MaximumSize = new Size(377, 900);
             Name = "RingForm";
@@ -100,5 +136,8 @@
         private Button button1;
         private TextBox textBox1;
         private Label label1;
+        private Label label2;
+        private Label label3;
+        private HScrollBar hScrollBar1;
     }
 }
