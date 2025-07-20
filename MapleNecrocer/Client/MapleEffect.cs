@@ -103,7 +103,7 @@ public class NormalEffect : SpriteEx
             if (Game.Player.InLadder)
                 X = Game.Player.X - 5;
             else
-                X = Game.Player.X-10;
+                X = Game.Player.X - 10;
         }
 
         Y = Game.Player.Y - 60;
@@ -136,7 +136,7 @@ public class SetEffect : SpriteEx
 {
     public SetEffect(Sprite Parent) : base(Parent)
     {
-        Instance = this;   
+        Instance = this;
     }
 
     public static SetEffect Instance;
@@ -291,8 +291,9 @@ public class ItemEffect : SpriteEx
 {
     public ItemEffect(Sprite Parent) : base(Parent)
     {
-       Instance = this;
+        Instance = this;
     }
+    public static bool IsUse;
     public static ItemEffect Instance;
     string Path;
     int Frame;
@@ -305,7 +306,7 @@ public class ItemEffect : SpriteEx
     static Wz_Node Entry;
     public static Dictionary<string, ItemEffect> UseList = new();
     public static void LoadList()
-    {  
+    {
         if (Wz.HasNode("Effect/ItemEff.img"))
         {
             foreach (var Iter in Wz.GetNodeA("Effect/ItemEff.img").Nodes)
@@ -328,6 +329,7 @@ public class ItemEffect : SpriteEx
             if ((Iter is ItemEffect) && ((ItemEffect)Iter).EffType == EffType)
             {
                 Iter.Dead();
+
                 var s = Iter;
                 s = null;
             }
@@ -606,6 +608,13 @@ public class ItemEffect : SpriteEx
         }
         Origin.Y = (int)(origin.Y + BrowPos.Y - OffY + BodyRelMove.Y);
 
+        if (EffType == EffectType.Chair)
+        {
+            if (Game.Player.Action == "sit" && ItemEffect.IsUse)
+                Visible = true;
+            else
+                Visible = false;
+        }
     }
 
     public override void DoDraw()
@@ -613,6 +622,8 @@ public class ItemEffect : SpriteEx
         if (ImageNode == null)
             return;
         base.DoDraw();
+
+
     }
 }
 

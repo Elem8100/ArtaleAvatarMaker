@@ -351,7 +351,6 @@ public class MapleChair : SpriteEx
             base.DoDraw();
 
 
-
     }
 }
 

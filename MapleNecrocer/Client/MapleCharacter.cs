@@ -852,19 +852,18 @@ public class AvatarParts : SpriteEx
             ChangeFrame = true;
 
 
-        MapleChair.BodyRelMove.X = 0;
-        MapleChair.BodyRelMove.Y = 0;
-        TamingMob.Navel.X = 0;
-        TamingMob.Navel.Y = 0;
-
-
+        // MapleChair.BodyRelMove.X = 0;
+        //  MapleChair.BodyRelMove.Y = 0;
+        //   TamingMob.Navel.X = 0;
+        //   TamingMob.Navel.Y = 0;
+     
         if (Wz.HasDataE("Character/00002000.img/" + State + "/" + Frame + "/move"))
         {
             MoveOffset = WzDict.GetVectorE("Character/00002000.img/" + State + "/" + Frame + "/move");
         }
         else
         {
-            if ((MapleChair.IsUse) && (!Owner.OtherPlayer))
+            if (AvatarForm.SelectedAction=="sit")
             {
                 MoveOffset.X = MapleChair.BodyRelMove.X;
                 MoveOffset.Y = MapleChair.BodyRelMove.Y;
@@ -873,10 +872,11 @@ public class AvatarParts : SpriteEx
             {
                 MoveOffset.X = 0;
                 MoveOffset.Y = 0;
+
             }
         }
 
-
+        
 
         if (FlipX)
             Owner.MoveX = Owner.X - 1 - MoveOffset.X;

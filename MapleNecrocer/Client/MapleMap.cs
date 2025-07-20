@@ -240,7 +240,7 @@ public class Map
                   
             }
             Player.SpawnNew();
-            NameTag.Create("              ");
+            NameTag.Create("  ");
            
            
             FirstLoaded = true;

@@ -63,7 +63,7 @@ public class Morph : SpriteEx
         {
             if (Iter is Morph)
             {
-                Iter.Dead();
+                Iter.Dead(); 
             }
         }
         EngineFunc.SpriteEngine.Dead();
