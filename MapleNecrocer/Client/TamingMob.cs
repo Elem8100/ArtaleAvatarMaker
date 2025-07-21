@@ -382,10 +382,11 @@ public class TamingMob : SpriteEx
 
     public override void DoDraw()
     {
-        if (Game.Player.Action == "sit")
+        if (TamingMob.IsUse)
             base.DoDraw();
-        else if (TamingMob.IsUse)
+        else if (MapleChair.IsUse && Game.Player.Action == "sit")
             base.DoDraw();
+
     }
 
 }
