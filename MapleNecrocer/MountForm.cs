@@ -29,6 +29,7 @@ public partial class MountForm : Form
         // return;
         TamingMob.IsUse = false;
         MapleChair.IsUse = false;
+        ItemEffect.IsUse = false;
         var ID = DataGrid.Rows[e.RowIndex].Cells[0].Value.ToString();
         TamingMob.Remove();
 
@@ -689,9 +690,10 @@ public partial class MountForm : Form
         TamingMob.Remove();
         ItemEffect.Remove(EffectType.Chair);
         MapleChair.Remove();
-       
-       // Game.Player.ResetAction = true;
-       // Game.Player.NewAction = Game.Player.StandType;
+        ItemEffect.IsUse = false;
+
+        // Game.Player.ResetAction = true;
+        // Game.Player.NewAction = Game.Player.StandType;
         TamingMob.IsUse = false;
 
         TamingMob.Navel.X = 0;

@@ -43,10 +43,9 @@ public partial class ChairForm : Form
         TamingMob.Navel.Y = 0;
         MapleChair.BodyRelMove.X = 0;
         MapleChair.BodyRelMove.Y = 0;
-
-        MapleChair.Create(ID);
-
         ItemEffect.IsUse = false;
+        MapleChair.Create(ID);
+       
         if (ItemEffect.AllList.Contains(ID))
         { 
             ItemEffect.Create(ID, EffectType.Chair);
