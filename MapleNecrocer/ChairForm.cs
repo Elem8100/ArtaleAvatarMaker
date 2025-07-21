@@ -29,15 +29,22 @@ public partial class ChairForm : Form
             return;
         if (!MapleChair.CanUse)
             return;
+
+        TamingMob.IsUse = false;
+        MapleChair.IsUse = false;
         var ID = DataGrid.Rows[e.RowIndex].Cells[0].Value.ToString();
 
         MapleChair.Remove();
 
         TamingMob.Remove();
         ItemEffect.Remove(EffectType.Chair);
-       
-        MapleChair.Create(ID);
 
+        TamingMob.Navel.X = 0;
+        TamingMob.Navel.Y = 0;
+        MapleChair.BodyRelMove.X = 0;
+        MapleChair.BodyRelMove.Y = 0;
+
+        MapleChair.Create(ID);
 
         ItemEffect.IsUse = false;
         if (ItemEffect.AllList.Contains(ID))
@@ -47,7 +54,6 @@ public partial class ChairForm : Form
            
         }
         MapleChair.IsUse = true;
-
 
         AvatarForm.SelectedFrame = true;
         AvatarForm.SelectedAction = "sit";
@@ -162,6 +168,11 @@ public partial class ChairForm : Form
         ItemEffect.Remove(EffectType.Chair);
         ItemEffect.IsUse = false;
         MapleChair.IsUse = false;
+
+        TamingMob.Navel.X = 0;
+        TamingMob.Navel.Y = 0;
+        MapleChair.BodyRelMove.X = 0;
+        MapleChair.BodyRelMove.Y = 0;
     }
 
     private void textBox2_TextChanged(object sender, EventArgs e)

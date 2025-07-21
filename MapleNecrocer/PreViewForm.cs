@@ -20,7 +20,7 @@ public partial class PreViewForm : Form
     }
     static int SaveCount;
     PsdImage MainPSD;
-    PsdImage Back;
+    
     void SavePSD()
     {
         Bitmap Bmp = new(System.Environment.CurrentDirectory + "\\Temp\\" + "walk1.0.png");
@@ -39,6 +39,7 @@ public partial class PreViewForm : Form
                 Layer = new Layer(PngStream);
                 PsdImg.AddLayer(Layer);
                 var FileName = System.IO.Path.GetFileNameWithoutExtension(File.FullName);
+               // PsdImg.AdjustBrightness(-100);
                 PsdImg.Save(System.Environment.CurrentDirectory + "\\Temp\\" + FileName + ".psd", true);
 
                 PngStream.Close();
@@ -49,7 +50,7 @@ public partial class PreViewForm : Form
 
 
         MainPSD = (PsdImage)Aspose.PSD.Image.Load(System.Environment.CurrentDirectory + "\\Avatar_CapeMod.psd");
-        Back = (PsdImage)Aspose.PSD.Image.Load(System.Environment.CurrentDirectory + "\\back2.psd");
+       // Back = (PsdImage)Aspose.PSD.Image.Load(System.Environment.CurrentDirectory + "\\back2.psd");
 
         var graphic = new Aspose.PSD.Graphics(MainPSD.Layers[0]);
         graphic.Clear(new Aspose.PSD.Color());
@@ -66,8 +67,12 @@ public partial class PreViewForm : Form
         foreach (var Iter in AvatarForm.Instance.ImageFormList)
         {
             var PsdImg = Aspose.PSD.RasterImage.Load(System.Environment.CurrentDirectory + "\\Temp\\" + Iter.FrameName + ".psd");
-            if (Morph.IsUse)
-              graphic.DrawImage(Back, new Aspose.PSD.Point(Iter.NewDrawPosX - 94, Iter.NewDrawPosY - 135));
+            if (Morph.IsUse || TamingMob.IsUse)
+            { 
+                var GrayBody = Aspose.PSD.RasterImage.Load(System.Environment.CurrentDirectory + "\\GrayBody\\" + Iter.FrameName + ".psd");
+                graphic.DrawImage(GrayBody, new Aspose.PSD.Point(Iter.NewDrawPosX-188 , Iter.NewDrawPosY-180));
+                GrayBody.Dispose();
+            }
             graphic.DrawImage(PsdImg, new Aspose.PSD.Point(Iter.NewDrawPosX - 188, Iter.NewDrawPosY - 180));
             (MainPSD.Layers[1] as LayerGroup).Layers[3].SetPixel(Iter.NewRedPointX, Iter.NewRedPointY, Aspose.PSD.Color.Red);
             PsdImg.Dispose();
@@ -78,7 +83,7 @@ public partial class PreViewForm : Form
         MessageBox.Show("儲存NewAvatar" + SaveCount.ToString() + ".psd 完成" + "\n" + "存放在PSD資料夾裡面");
 
         MainPSD.Dispose();
-        Back.Dispose();
+      
         AvatarForm.Instance.ImageFormList.Clear();
         foreach (var Iter in AvatarForm.Instance.ImageFormList)
             Iter.Close();
@@ -90,8 +95,7 @@ public partial class PreViewForm : Form
     {
         if (MainPSD != null)
             MainPSD.Dispose();
-        if (Back != null)
-            MainPSD.Dispose();
+       
         AvatarForm.Instance.ImageFormList.Clear();
         foreach (var Iter in AvatarForm.Instance.ImageFormList)
             Iter.Close();

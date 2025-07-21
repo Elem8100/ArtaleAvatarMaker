@@ -27,6 +27,8 @@ public partial class MountForm : Form
     {
         //if (Morph.IsUse)
         // return;
+        TamingMob.IsUse = false;
+        MapleChair.IsUse = false;
         var ID = DataGrid.Rows[e.RowIndex].Cells[0].Value.ToString();
         TamingMob.Remove();
 
@@ -34,6 +36,10 @@ public partial class MountForm : Form
         ItemEffect.Remove(EffectType.Chair);
 
         TamingMob.IsChairTaming = false;
+        TamingMob.Navel.X = 0;
+        TamingMob.Navel.Y = 0;
+        MapleChair.BodyRelMove.X = 0;
+        MapleChair.BodyRelMove.Y = 0;
         TamingMob.Create(ID);
         TamingMob.IsUse = true;
 
@@ -683,8 +689,16 @@ public partial class MountForm : Form
         TamingMob.Remove();
         ItemEffect.Remove(EffectType.Chair);
         MapleChair.Remove();
-        Game.Player.ResetAction = true;
-        Game.Player.NewAction = Game.Player.StandType;
+       
+       // Game.Player.ResetAction = true;
+       // Game.Player.NewAction = Game.Player.StandType;
+        TamingMob.IsUse = false;
+
+        TamingMob.Navel.X = 0;
+        TamingMob.Navel.Y = 0;
+        MapleChair.BodyRelMove.X = 0;
+        MapleChair.BodyRelMove.Y = 0;
+
     }
 
     private void MountForm_KeyDown(object sender, KeyEventArgs e)

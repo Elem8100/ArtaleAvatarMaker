@@ -1246,6 +1246,8 @@ public partial class AvatarForm : Form
             SelectedFrameNum = sprite[1].ToInt();
             SelectedAction = sprite[0];
 
+            int _SelectedFrameNum = SelectedFrameNum;
+            string _SelectedAction = SelectedAction; ;
 
             if (Morph.IsUse && Morph.Instance != null)
             {
@@ -1287,23 +1289,72 @@ public partial class AvatarForm : Form
 
             }
 
-
-
-            if (AvatarForm.SelectedAction == "sit")
+           
+            if (TamingMob.IsUse)
             {
-                MapleChair.BodyRelMove.X = cx_;
-                MapleChair.BodyRelMove.Y = cy_;
-                TamingMob.Navel.X = tx;
-                TamingMob.Navel.Y = ty;
-            }
-            else
-            {
-                MapleChair.BodyRelMove.X = 0;
-                MapleChair.BodyRelMove.Y = 0;
-                TamingMob.Navel.X = 0;
-                TamingMob.Navel.Y = 0;
-            }
+                AvatarForm.SelectedAction ="sit";
+                foreach (var Iter in TamingMob.PartList)
+                {
+                     switch (_SelectedAction)
+                     {
+                         case "stand1":
+                         case "stand2":
+                             Iter.State = "stand1";
+                             break;
+                         case "walk1":
+                         case "walk2":
+                             Iter.State = "walk1";
+                             break;
 
+                         case "ladder":
+                             Iter.State = "ladder";
+                             AvatarForm.SelectedAction = "ladder";
+                             break;
+                         case "rope":
+                             Iter.State = "rope";
+                             AvatarForm.SelectedAction = "rope";
+                             break;
+                         case "fly":
+                             Iter.State = "fly";
+                             break;
+
+                         case "jump":
+                             Iter.State = "jump";
+                             break;
+
+                         case "prone":
+                             Iter.State = "prone";
+                             break;
+                         case "sit":
+                             Iter.State = "tired";
+                             break;
+                         default:
+                             Iter.State = "stand1";
+                             break;
+                     }
+                    Iter.Frame = _SelectedFrameNum;
+                    Iter.DoMove(1);
+                }
+            }
+           
+
+            if (!TamingMob.IsUse)
+            {
+                if (AvatarForm.SelectedAction == "sit")
+                {
+                    MapleChair.BodyRelMove.X = cx_;
+                    MapleChair.BodyRelMove.Y = cy_;
+                    TamingMob.Navel.X = tx;
+                    TamingMob.Navel.Y = ty;
+                }
+                else
+                {
+                    MapleChair.BodyRelMove.X = 0;
+                    MapleChair.BodyRelMove.Y = 0;
+                    TamingMob.Navel.X = 0;
+                    TamingMob.Navel.Y = 0;
+                }
+            }
 
             // 必须domove 3次，不然序号会慢一帧
             Game.Player.DoMove(0);
