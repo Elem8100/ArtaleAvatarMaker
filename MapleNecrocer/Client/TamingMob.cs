@@ -17,12 +17,14 @@ public class TamingMob : SpriteEx
 {
     public TamingMob(Sprite Parent) : base(Parent)
     {
+        Instance = this;
     }
-
+    public static TamingMob Instance;
+    public static List<TamingMob> PartList = new();
     string UpPath;
     string Path, ID;
-    string State;
-    int Frame;
+    public string State;
+    public int Frame;
     string ImageNum;
     int FTime;
     int Delay;
@@ -72,6 +74,7 @@ public class TamingMob : SpriteEx
         }
         TamingMob.Navel.X = 0;
         TamingMob.Navel.Y = 0;
+        PartList.Clear();
     }
 
     public static void CreateSprites()
@@ -128,6 +131,7 @@ public class TamingMob : SpriteEx
                                     TamingMob.FixedImageNum = true;
                                 if (Iter3.Text.Length >= 3)
                                     TamingMob.FixedImageNum = true;
+                                PartList.Add(TamingMob);
                             }
                         }
                     }
@@ -201,6 +205,7 @@ public class TamingMob : SpriteEx
         {
             if (Data.ContainsKey(UpPath + "/" + State + "/" + Frame))
                 Delay = Data[UpPath + "/" + State + "/" + Frame].ToInt();
+
         }
 
         FTime += 17;
@@ -240,8 +245,8 @@ public class TamingMob : SpriteEx
 
         if (Game.Player.JumpState != JumpState.jsNone)
         {
-            Frame = 0;
-            State = "jump";
+            //  Frame = 0;
+            //  State = "jump";
         }
 
         if (Game.Player.JumpState == JumpState.jsNone)
@@ -256,7 +261,7 @@ public class TamingMob : SpriteEx
             if (Keyboard.KeyUp(Input.Left) || Keyboard.KeyUp(Input.Right))
                 State = "stand1";
         }
-
+        /*
         if (Game.Player.InLadder)
         {
             switch (Game.Player.LadderType)
@@ -286,7 +291,7 @@ public class TamingMob : SpriteEx
                     break;
             }
         }
-
+        */
         if (Wz.HasDataE(UpPath + "/characterAction"))
         {
             if (Wz.HasDataE(UpPath + "/characterAction/" + State))
@@ -319,7 +324,7 @@ public class TamingMob : SpriteEx
                 Flip = 1;
                 break;
         }
-        Offset.Y = -origin.Y+ChairForm.AdujstY;
+        Offset.Y = -origin.Y + ChairForm.AdujstY;
 
         if (Wz.HasDataE(Path + "/map/navel"))
         {
@@ -377,8 +382,10 @@ public class TamingMob : SpriteEx
 
     public override void DoDraw()
     {
-        if(Game.Player.Action=="sit")
-          base.DoDraw();
+        if (Game.Player.Action == "sit")
+            base.DoDraw();
+        else if (TamingMob.IsUse)
+            base.DoDraw();
     }
 
 }

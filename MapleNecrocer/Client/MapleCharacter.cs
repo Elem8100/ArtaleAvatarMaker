@@ -1281,7 +1281,7 @@ public class AvatarParts : SpriteEx
 
 
         PartName Part = Equip.GetPart(ID);
-
+        
         if (TamingMob.IsUse)
         {
             Owner.Attack = false;
@@ -1294,7 +1294,7 @@ public class AvatarParts : SpriteEx
             // if (Part = Weapon) or (Part = CashWeapon) then
             // Exit;
         }
-
+        
 
 
 
