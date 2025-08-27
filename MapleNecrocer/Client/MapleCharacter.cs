@@ -169,6 +169,7 @@ public class Player : JumperSprite
         Game.Player.FaceDir = FaceDir.None;
         Game.Player.JumpState = JumpState.jsFalling;
 
+
         foreach (var Iter in Wz.GetNodeA("Base/zmap.img").Nodes)
             AvatarParts.ZMap.Add(Iter.Text);
         for (int I = 2000; I <= 2011; I++)
@@ -312,6 +313,8 @@ public class Player : JumperSprite
                 break;
 
             case PartName.CashWeapon:
+
+
                 for (int i = 69; i >= 30; i--)
                 {
                     if (Wz.HasDataE(LPath + EquipID + ".img/" + i.ToString() + "/stand1"))
@@ -324,7 +327,18 @@ public class Player : JumperSprite
                         WalkType = "walk2";
                     if (Wz.HasDataE(LPath + EquipID + ".img/" + i.ToString()))
                         WeaponNum = i.ToString();
+                    /*
+                   if (Wz.HasDataE(LPath + EquipID + ".img/52"))
+                   {
+                       WeaponNum = "52";
+                       StandType = "stand2";
+                       WalkType = "walk2";
+                   }
+                    */
                 }
+
+
+
                 AttackActions.Clear();
                 AttackOFs.Clear();
                 AfterImageStr = Equip.GetAfterImageStr("01" + WeaponNum + "1234");
@@ -412,7 +426,7 @@ public class Player : JumperSprite
                             {
                                 if ((MapleChair.IsUse) || (TamingMob.IsUse))
                                 {
-                                    if ( Part == PartName.Weapon && Game.Player.Action == "sit")
+                                    if (Part == PartName.Weapon && Game.Player.Action == "sit")
                                         Sprite.Visible = false;
                                     else
                                         Sprite.Visible = true;
@@ -856,14 +870,14 @@ public class AvatarParts : SpriteEx
         //  MapleChair.BodyRelMove.Y = 0;
         //   TamingMob.Navel.X = 0;
         //   TamingMob.Navel.Y = 0;
-     
+
         if (Wz.HasDataE("Character/00002000.img/" + State + "/" + Frame + "/move"))
         {
             MoveOffset = WzDict.GetVectorE("Character/00002000.img/" + State + "/" + Frame + "/move");
         }
         else
         {
-            if (AvatarForm.SelectedAction=="sit")
+            if (AvatarForm.SelectedAction == "sit")
             {
                 MoveOffset.X = MapleChair.BodyRelMove.X;
                 MoveOffset.Y = MapleChair.BodyRelMove.Y;
@@ -876,7 +890,7 @@ public class AvatarParts : SpriteEx
             }
         }
 
-        
+
 
         if (FlipX)
             Owner.MoveX = Owner.X - 1 - MoveOffset.X;
@@ -961,6 +975,18 @@ public class AvatarParts : SpriteEx
         int FaceFrameCount = Equip.Data["face/" + Expression + "/FrameCount"];
         FaceDelay = Equip.Data["face/" + Expression + "/" + FaceFrame + "/delay"];
 
+        
+        if (Part == PartName.CashWeapon && AvatarForm.SelectedFrame)
+        {
+            for (int i = 69; i >= 30; i--)
+            {
+                if (Wz.HasDataE("Character/Weapon/" + ID + ".img/" + i.ToString() + "/" + AvatarForm.SelectedAction))
+                    Owner.WeaponNum = i.ToString();
+
+            }
+        }
+        
+
         string Directory = Equip.GetDir(ID);
         string Path;
         if ((Image != "face") && (Equip.GetPart(ID) != PartName.FaceAcc))
@@ -978,6 +1004,8 @@ public class AvatarParts : SpriteEx
         {
             Path = C + Directory + ID + ".img/" + Expression + "/" + FaceFrame + "/" + Image;
         }
+
+
 
 
         if ((Image != "face") && (Equip.GetPart(ID) != PartName.FaceAcc))
@@ -1281,7 +1309,7 @@ public class AvatarParts : SpriteEx
 
 
         PartName Part = Equip.GetPart(ID);
-        
+
         if (TamingMob.IsUse)
         {
             Owner.Attack = false;
@@ -1294,7 +1322,7 @@ public class AvatarParts : SpriteEx
             // if (Part = Weapon) or (Part = CashWeapon) then
             // Exit;
         }
-        
+
 
 
 
@@ -1371,28 +1399,28 @@ public class AvatarParts : SpriteEx
 
         Visible = true;
 
-        
+
         // if ((TamingMob.IsUse) || (MapleChair.IsUse))
         if (Owner.Action == "sit")
         {
-            if (Part == PartName.CashWeapon )
+            if (Part == PartName.CashWeapon)
             {
-                if (MapleChair.ShowWeapon==true)
-                { 
-                    Visible =true;
-                  
-                }
-                else if (MapleChair.ShowWeapon==false)
+                if (MapleChair.ShowWeapon == true)
                 {
-                    Visible =false;
+                    Visible = true;
+
+                }
+                else if (MapleChair.ShowWeapon == false)
+                {
+                    Visible = false;
                 }
             }
         }
         else
         {
-            Visible=true;
+            Visible = true;
         }
-        
+
 
         //Game.Player.FlipX = FlipX;
         if ((State == "ladder") || (State == "rope"))
