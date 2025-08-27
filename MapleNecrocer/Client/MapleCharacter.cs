@@ -403,10 +403,13 @@ public class Player : JumperSprite
                     Equip.DataS.AddOrReplace(Iter.Text + "/" + Iter2.Text, Iter2.GetStr("action") + "/" + Iter2.GetInt("frame"));
                 if (Iter2.Text == "hairShade")
                     continue;
+               
 
                 foreach (var Iter3 in Iter2.Nodes)
                 {
                     if ((Iter3.Text == "hairShade") || (Iter3.Text == "006"))
+                        continue;
+                    if (Iter3.Text == "mailChestBelowBody")
                         continue;
                     if (Iter3.Value is Wz_Png || Iter3.Value is Wz_Uol)
                     {
